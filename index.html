@@ -133,26 +133,48 @@ color:#94a3b8;
 © 2026 VDTA Solutions. All Rights Reserved.
 </footer>
 
-</body>
-</html>
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+<!-- FIREBASE SCRIPT -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } 
+from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
   apiKey: "AIzaSyAf79JVQOwBC6NXzTpJvg6DgZFM9A3gtz8",
   authDomain: "vdta-solutions7.firebaseapp.com",
   projectId: "vdta-solutions7",
-  storageBucket: "vdta-solutions7.firebasestorage.app",
-  messagingSenderId: "440787032300",
-  appId: "1:440787032300:web:326b66d60acae019baadc9",
-  measurementId: "G-PVE1X9G00K"
+  appId: "1:440787032300:web:326b66d60acae019baadc9"
 };
 
-// Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+const auth = getAuth(app);
+
+// SIGN UP
+window.signup = async function () {
+  const email = prompt("Enter Email:");
+  const password = prompt("Enter Password:");
+
+  try {
+    await createUserWithEmailAndPassword(auth, email, password);
+    alert("Account Created Successfully!");
+  } catch (e) {
+    alert(e.message);
+  }
+};
+
+// LOGIN
+window.login = async function () {
+  const email = prompt("Enter Email:");
+  const password = prompt("Enter Password:");
+
+  try {
+    await signInWithEmailAndPassword(auth, email, password);
+    alert("Login Successful!");
+  } catch (e) {
+    alert(e.message);
+  }
+};
+</script>
+
+</body>
+</html>
