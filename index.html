@@ -3,93 +3,61 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>VDTA Solutions</title>
+<title>VDTA App</title>
 
 <style>
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial,sans-serif;
-}
-
 body{
+margin:0;
+font-family:Arial;
 background:#0f172a;
 color:white;
 }
 
 header{
 padding:20px;
+background:#111827;
 display:flex;
 justify-content:space-between;
 align-items:center;
 }
 
-.logo{
-font-size:28px;
-font-weight:bold;
+h1{
+margin:0;
+font-size:22px;
 }
 
-.hero{
-height:85vh;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-text-align:center;
+.container{
 padding:20px;
-}
-
-.hero h1{
-font-size:48px;
-margin-bottom:15px;
-}
-
-.hero p{
-font-size:20px;
-margin-bottom:30px;
-color:#cbd5e1;
-}
-
-.btns{
-display:flex;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
 gap:15px;
-}
-
-button{
-padding:14px 30px;
-border:none;
-border-radius:10px;
-font-size:16px;
-cursor:pointer;
-}
-
-.login{
-background:white;
-color:black;
-}
-
-.signup{
-background:#2563eb;
-color:white;
-}
-
-.services{
-padding:60px 20px;
-text-align:center;
 }
 
 .card{
 background:#1e293b;
 padding:20px;
-margin:15px;
 border-radius:12px;
+cursor:pointer;
+transition:0.2s;
 }
 
-footer{
-padding:20px;
-text-align:center;
-color:#94a3b8;
+.card:hover{
+transform:scale(1.05);
+background:#273449;
+}
+
+button{
+margin-top:10px;
+padding:10px 15px;
+border:none;
+border-radius:8px;
+cursor:pointer;
+background:#2563eb;
+color:white;
+}
+
+.logout{
+background:red;
 }
 </style>
 </head>
@@ -97,83 +65,49 @@ color:#94a3b8;
 <body>
 
 <header>
-<div class="logo">VDTA Solutions</div>
+<h1>VDTA Dashboard</h1>
+<button class="logout" onclick="logout()">Logout</button>
 </header>
 
-<section class="hero">
-<h1>VDTA Solutions</h1>
-<p>One Solution. Endless Possibilities.</p>
-
-<div class="btns">
-<button class="login" onclick="login()">Login</button>
-<button class="signup" onclick="signup()">Sign Up</button>
-</div>
-</section>
-
-<section class="services">
-<h2>Our Services</h2>
+<div class="container">
 
 <div class="card">
-<h3>Website Development</h3>
-<p>Modern websites for businesses and startups.</p>
+<h2>Job Service</h2>
+<p>Find and apply for jobs.</p>
+<button onclick="alert('Job Service Coming Soon')">Open</button>
 </div>
 
 <div class="card">
-<h3>AI Solutions</h3>
-<p>Automation and AI-powered business tools.</p>
+<h2>Investment Service</h2>
+<p>Grow your money safely.</p>
+<button onclick="alert('Investment Service Coming Soon')">Open</button>
 </div>
 
 <div class="card">
-<h3>Digital Services</h3>
-<p>Everything your business needs in one place.</p>
+<h2>Check Payment Status</h2>
+<p>See if your payment is completed.</p>
+<button onclick="alert('Payment Status Feature Coming Soon')">Check</button>
 </div>
-</section>
 
-<footer>
-© 2026 VDTA Solutions. All Rights Reserved.
-</footer>
+<div class="card">
+<h2>Track Payment</h2>
+<p>Track your transactions live.</p>
+<button onclick="alert('Tracking Coming Soon')">Track</button>
+</div>
 
-<!-- FIREBASE SCRIPT -->
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } 
-from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
+<div class="card">
+<h2>Buy Data</h2>
+<p>Purchase internet/data packages.</p>
+<button onclick="alert('Buy Data Coming Soon')">Buy</button>
+</div>
 
-const firebaseConfig = {
-  apiKey: "AIzaSyAf79JVQOwBC6NXzTpJvg6DgZFM9A3gtz8",
-  authDomain: "vdta-solutions7.firebaseapp.com",
-  projectId: "vdta-solutions7",
-  appId: "1:440787032300:web:326b66d60acae019baadc9"
-};
+</div>
 
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-
-// SIGN UP
-window.signup = async function () {
-  const email = prompt("Enter Email:");
-  const password = prompt("Enter Password:");
-
-  try {
-    await createUserWithEmailAndPassword(auth, email, password);
-    alert("Account Created Successfully!");
-  } catch (e) {
-    alert(e.message);
-  }
-};
-
-// LOGIN
-window.login = async function () {
-  const email = prompt("Enter Email:");
-  const password = prompt("Enter Password:");
-
-  try {
-    await signInWithEmailAndPassword(auth, email, password);
-    alert("Login Successful!");
-  } catch (e) {
-    alert(e.message);
-  }
-};
+<script>
+function logout(){
+alert("Logged out");
+window.location.href = "index.html";
+}
 </script>
 
 </body>
