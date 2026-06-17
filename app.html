@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>VDTA App</title>
+<title>VDTA Dashboard</title>
 
 <style>
 body{
@@ -21,11 +21,6 @@ justify-content:space-between;
 align-items:center;
 }
 
-h1{
-margin:0;
-font-size:22px;
-}
-
 .container{
 padding:20px;
 display:grid;
@@ -37,27 +32,42 @@ gap:15px;
 background:#1e293b;
 padding:20px;
 border-radius:12px;
-cursor:pointer;
-transition:0.2s;
-}
-
-.card:hover{
-transform:scale(1.05);
-background:#273449;
 }
 
 button{
-margin-top:10px;
 padding:10px 15px;
 border:none;
 border-radius:8px;
 cursor:pointer;
 background:#2563eb;
 color:white;
+margin-top:10px;
 }
 
 .logout{
 background:red;
+}
+
+input, textarea{
+width:100%;
+padding:10px;
+margin:5px 0;
+border-radius:8px;
+border:none;
+outline:none;
+}
+
+.profile-box{
+background:#1e293b;
+padding:20px;
+border-radius:12px;
+margin-bottom:20px;
+}
+
+#trackResult{
+margin-top:10px;
+color:#22c55e;
+font-weight:bold;
 }
 </style>
 </head>
@@ -71,43 +81,114 @@ background:red;
 
 <div class="container">
 
+<!-- PROFILE -->
+<div class="profile-box">
+<h2>User Profile</h2>
+
+<input id="name" placeholder="Full Name">
+<input id="number" placeholder="Phone Number">
+<textarea id="address" placeholder="Address + Pincode"></textarea>
+<input id="dob" type="date">
+
+<button onclick="saveProfile()">Save Profile</button>
+
+<p id="showProfile"></p>
+</div>
+
+<!-- JOB -->
 <div class="card">
 <h2>Job Service</h2>
-<p>Find and apply for jobs.</p>
-<button onclick="alert('Job Service Coming Soon')">Open</button>
+<button onclick="alert('Coming Soon')">Open</button>
 </div>
 
+<!-- INVESTMENT -->
 <div class="card">
 <h2>Investment Service</h2>
-<p>Grow your money safely.</p>
-<button onclick="alert('Investment Service Coming Soon')">Open</button>
+<button onclick="alert('Coming Soon')">Open</button>
 </div>
 
+<!-- PAYMENT STATUS -->
 <div class="card">
 <h2>Check Payment Status</h2>
-<p>See if your payment is completed.</p>
-<button onclick="alert('Payment Status Feature Coming Soon')">Check</button>
+<button onclick="alert('Coming Soon')">Check</button>
 </div>
 
+<!-- TRACK PAYMENT -->
 <div class="card">
 <h2>Track Payment</h2>
-<p>Track your transactions live.</p>
-<button onclick="alert('Tracking Coming Soon')">Track</button>
+
+<input id="trackNumber" placeholder="Enter Mobile Number">
+
+<button onclick="trackPayment()">Track Payment</button>
+
+<p id="trackResult"></p>
 </div>
 
+<!-- BUY DATA -->
 <div class="card">
 <h2>Buy Data</h2>
-<p>Purchase internet/data packages.</p>
-<button onclick="alert('Buy Data Coming Soon')">Buy</button>
+<button onclick="alert('Coming Soon')">Buy</button>
 </div>
 
 </div>
 
 <script>
+
+// PROFILE SAVE
+function saveProfile(){
+const profile = {
+name: document.getElementById("name").value,
+number: document.getElementById("number").value,
+address: document.getElementById("address").value,
+dob: document.getElementById("dob").value
+};
+
+localStorage.setItem("userProfile", JSON.stringify(profile));
+
+alert("Profile Saved!");
+showProfile();
+}
+
+// SHOW PROFILE
+function showProfile(){
+const data = JSON.parse(localStorage.getItem("userProfile"));
+
+if(data){
+document.getElementById("showProfile").innerHTML =
+`
+<strong>Name:</strong> ${data.name}<br>
+<strong>Number:</strong> ${data.number}<br>
+<strong>Address:</strong> ${data.address}<br>
+<strong>DOB:</strong> ${data.dob}
+`;
+}
+}
+
+// TRACK PAYMENT (DEMO)
+function trackPayment(){
+const number = document.getElementById("trackNumber").value;
+const result = document.getElementById("trackResult");
+
+if(!number){
+result.innerText = "Please enter number";
+return;
+}
+
+let progress = 75;
+
+result.innerHTML =
+`Payment for <b>${number}</b><br>
+Your payment progress is <b>${progress}%</b> ⏳`;
+}
+
+// LOGOUT
 function logout(){
-alert("Logged out");
 window.location.href = "index.html";
 }
+
+// LOAD PROFILE ON START
+showProfile();
+
 </script>
 
 </body>
