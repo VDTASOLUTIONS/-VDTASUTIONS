@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VDTA App</title>
+
+<style>
+body{
+margin:0;
+font-family:Arial;
+background:#0f172a;
+color:white;
+}
+
+header{
+padding:20px;
+background:#111827;
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+h1{
+margin:0;
+font-size:22px;
+}
+
+.container{
+padding:20px;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:15px;
+}
+
+.card{
+background:#1e293b;
+padding:20px;
+border-radius:12px;
+cursor:pointer;
+transition:0.2s;
+}
+
+.card:hover{
+transform:scale(1.05);
+background:#273449;
+}
+
+button{
+margin-top:10px;
+padding:10px 15px;
+border:none;
+border-radius:8px;
+cursor:pointer;
+background:#2563eb;
+color:white;
+}
+
+.logout{
+background:red;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>VDTA Dashboard</h1>
+<button class="logout" onclick="logout()">Logout</button>
+</header>
+
+<div class="container">
+
+<div class="card">
+<h2>Job Service</h2>
+<p>Find and apply for jobs.</p>
+<button onclick="alert('Job Service Coming Soon')">Open</button>
+</div>
+
+<div class="card">
+<h2>Investment Service</h2>
+<p>Grow your money safely.</p>
+<button onclick="alert('Investment Service Coming Soon')">Open</button>
+</div>
+
+<div class="card">
+<h2>Check Payment Status</h2>
+<p>See if your payment is completed.</p>
+<button onclick="alert('Payment Status Feature Coming Soon')">Check</button>
+</div>
+
+<div class="card">
+<h2>Track Payment</h2>
+<p>Track your transactions live.</p>
+<button onclick="alert('Tracking Coming Soon')">Track</button>
+</div>
+
+<div class="card">
+<h2>Buy Data</h2>
+<p>Purchase internet/data packages.</p>
+<button onclick="alert('Buy Data Coming Soon')">Buy</button>
+</div>
+
+</div>
+
+<script>
+function logout(){
+alert("Logged out");
+window.location.href = "index.html";
+}
+</script>
+
+</body>
+</html>
