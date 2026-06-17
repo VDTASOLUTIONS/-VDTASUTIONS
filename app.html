@@ -3,71 +3,114 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>VDTA Dashboard</title>
+<title>VDTA App</title>
 
 <style>
 body{
 margin:0;
 font-family:Arial;
-background:#0f172a;
+background:#0b1220;
 color:white;
 }
 
+/* TOP BAR */
 header{
-padding:20px;
-background:#111827;
 display:flex;
-justify-content:space-between;
 align-items:center;
+justify-content:space-between;
+padding:12px 18px;
+background:#111827;
+position:sticky;
+top:0;
 }
 
+.logo-box{
+display:flex;
+align-items:center;
+gap:10px;
+}
+
+.logo-box img{
+height:32px;
+width:32px;
+border-radius:8px;
+}
+
+.logo-box h1{
+font-size:16px;
+margin:0;
+}
+
+.logout{
+background:#ef4444;
+border:none;
+color:white;
+padding:8px 12px;
+border-radius:8px;
+cursor:pointer;
+font-size:12px;
+}
+
+/* GRID */
 .container{
-padding:20px;
+padding:15px;
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:15px;
+grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+gap:12px;
 }
 
+/* CARDS */
 .card{
 background:#1e293b;
-padding:20px;
+padding:15px;
 border-radius:12px;
+text-align:center;
+transition:0.2s;
 }
 
-button{
-padding:10px 15px;
+.card:hover{
+transform:scale(1.03);
+background:#273449;
+}
+
+.card h2{
+font-size:14px;
+margin-bottom:8px;
+}
+
+.card button{
+padding:8px 10px;
 border:none;
 border-radius:8px;
 cursor:pointer;
 background:#2563eb;
 color:white;
-margin-top:10px;
+font-size:12px;
+margin-top:8px;
 }
 
-.logout{
-background:red;
+/* PROFILE */
+.profile{
+background:#1e293b;
+padding:15px;
+border-radius:12px;
+margin:15px;
 }
 
-input, textarea{
+input,textarea{
 width:100%;
-padding:10px;
+padding:8px;
 margin:5px 0;
 border-radius:8px;
 border:none;
 outline:none;
-}
-
-.profile-box{
-background:#1e293b;
-padding:20px;
-border-radius:12px;
-margin-bottom:20px;
+font-size:12px;
 }
 
 #trackResult{
-margin-top:10px;
+margin-top:8px;
 color:#22c55e;
-font-weight:bold;
+font-size:12px;
 }
 </style>
 </head>
@@ -75,15 +118,17 @@ font-weight:bold;
 <body>
 
 <header>
-<h1>VDTA Dashboard</h1>
+<div class="logo-box">
+<img src="Image.png" alt="logo">
+<h1>VDTA</h1>
+</div>
+
 <button class="logout" onclick="logout()">Logout</button>
 </header>
 
-<div class="container">
-
 <!-- PROFILE -->
-<div class="profile-box">
-<h2>User Profile</h2>
+<div class="profile">
+<h3 style="margin:0 0 10px 0;">Your Profile</h3>
 
 <input id="name" placeholder="Full Name">
 <input id="number" placeholder="Phone Number">
@@ -95,101 +140,23 @@ font-weight:bold;
 <p id="showProfile"></p>
 </div>
 
-<!-- JOB -->
+<!-- SERVICES -->
+<div class="container">
+
 <div class="card">
-<h2>Job Service</h2>
+<h2>Jobs</h2>
 <button onclick="alert('Coming Soon')">Open</button>
 </div>
 
-<!-- INVESTMENT -->
 <div class="card">
-<h2>Investment Service</h2>
+<h2>Investment</h2>
 <button onclick="alert('Coming Soon')">Open</button>
 </div>
 
-<!-- PAYMENT STATUS -->
 <div class="card">
-<h2>Check Payment Status</h2>
+<h2>Payment Status</h2>
 <button onclick="alert('Coming Soon')">Check</button>
 </div>
 
-<!-- TRACK PAYMENT -->
 <div class="card">
 <h2>Track Payment</h2>
-
-<input id="trackNumber" placeholder="Enter Mobile Number">
-
-<button onclick="trackPayment()">Track Payment</button>
-
-<p id="trackResult"></p>
-</div>
-
-<!-- BUY DATA -->
-<div class="card">
-<h2>Buy Data</h2>
-<button onclick="alert('Coming Soon')">Buy</button>
-</div>
-
-</div>
-
-<script>
-
-// PROFILE SAVE
-function saveProfile(){
-const profile = {
-name: document.getElementById("name").value,
-number: document.getElementById("number").value,
-address: document.getElementById("address").value,
-dob: document.getElementById("dob").value
-};
-
-localStorage.setItem("userProfile", JSON.stringify(profile));
-
-alert("Profile Saved!");
-showProfile();
-}
-
-// SHOW PROFILE
-function showProfile(){
-const data = JSON.parse(localStorage.getItem("userProfile"));
-
-if(data){
-document.getElementById("showProfile").innerHTML =
-`
-<strong>Name:</strong> ${data.name}<br>
-<strong>Number:</strong> ${data.number}<br>
-<strong>Address:</strong> ${data.address}<br>
-<strong>DOB:</strong> ${data.dob}
-`;
-}
-}
-
-// TRACK PAYMENT (DEMO)
-function trackPayment(){
-const number = document.getElementById("trackNumber").value;
-const result = document.getElementById("trackResult");
-
-if(!number){
-result.innerText = "Please enter number";
-return;
-}
-
-let progress = 75;
-
-result.innerHTML =
-`Payment for <b>${number}</b><br>
-Your payment progress is <b>${progress}%</b> ⏳`;
-}
-
-// LOGOUT
-function logout(){
-window.location.href = "index.html";
-}
-
-// LOAD PROFILE ON START
-showProfile();
-
-</script>
-
-</body>
-</html>
