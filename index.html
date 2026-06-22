@@ -2,9 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VDTA Solutions | Official Portal</title>
     <style>
-        body { font-family: sans-serif; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; background: #f8fafc; }
+        body { font-family: sans-serif; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; background: #f8fafc; margin: 0; }
         .card { background: white; padding: 30px; border-radius: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); width: 300px; text-align: center; }
         input { width: 100%; padding: 12px; margin: 15px 0; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; }
         button { width: 100%; padding: 12px; background: #0f172a; color: white; border: none; border-radius: 8px; cursor: pointer; }
@@ -13,7 +14,7 @@
 <body>
 
 <div class="card">
-    <h1>Login</h1>
+    <h2>Login</h2>
     <input type="tel" id="phoneInput" placeholder="Enter Mobile Number">
     <button onclick="goToProfile()">Enter Application</button>
 </div>
@@ -21,9 +22,13 @@
 <script>
     function goToProfile() {
         const phone = document.getElementById('phoneInput').value;
+        
+        // Validation: Ensure the number is entered
         if(phone.length >= 10) {
-            // Save the number so your next page can use it
+            // Save the number to local storage so profile.html can read it
             localStorage.setItem('userPhone', phone);
+            
+            // Redirect to the profile page
             window.location.href = "profile.html";
         } else {
             alert("Please enter a valid mobile number.");
