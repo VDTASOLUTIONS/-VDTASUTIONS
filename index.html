@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VDTA Solutions | Secure Client Login</title>
+    <title>VDTA Solutions | Official Portal</title>
     <style>
         body { 
             margin: 0; 
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-            background: #0f172a; 
+            font-family: 'Segoe UI', sans-serif; 
+            background: #f8fafc; 
             display: flex; 
             justify-content: center; 
             align-items: center; 
@@ -16,49 +16,60 @@
         }
         .login-card { 
             background: #ffffff; 
-            padding: 40px; 
-            border-radius: 20px; 
+            padding: 50px; 
+            border-radius: 24px; 
             width: 100%; 
-            max-width: 400px; 
+            max-width: 420px; 
             text-align: center; 
-            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.3);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
         }
-        .login-card img { width: 80px; margin-bottom: 20px; }
-        h2 { color: #1e293b; margin-bottom: 10px; }
-        p { color: #64748b; margin-bottom: 30px; font-size: 0.9em; }
+        .logo { width: 120px; margin-bottom: 20px; }
+        h1 { color: #0f172a; margin: 0; font-size: 28px; font-weight: 700; }
+        .slogan { color: #64748b; font-size: 14px; margin-bottom: 30px; }
+        
         input { 
             width: 100%; 
-            padding: 14px; 
+            padding: 16px; 
             margin-bottom: 20px; 
             border: 2px solid #e2e8f0; 
-            border-radius: 10px; 
+            border-radius: 12px; 
             box-sizing: border-box; 
-            font-size: 16px; 
+            font-size: 16px;
         }
+        
+        /* Button Container */
+        .button-group { display: flex; gap: 10px; }
+        
         button { 
-            width: 100%; 
-            padding: 14px; 
-            background: #3b82f6; 
-            color: white; 
+            flex: 1; 
+            padding: 16px; 
             border: none; 
-            border-radius: 10px; 
-            font-size: 16px; 
-            font-weight: bold; 
+            border-radius: 12px; 
+            font-size: 15px; 
+            font-weight: 600; 
             cursor: pointer; 
-            transition: background 0.3s;
+            transition: all 0.3s;
         }
-        button:hover { background: #2563eb; }
+        .btn-login { background: #0f172a; color: white; }
+        .btn-login:hover { background: #334155; }
+        
+        .btn-signup { background: #e2e8f0; color: #0f172a; }
+        .btn-signup:hover { background: #cbd5e1; }
     </style>
 </head>
 <body>
 
 <div class="login-card">
-    <img src="logo.png" alt="Logo">
-    <h2>Welcome Back</h2>
-    <p>Please enter your registered mobile number to access your account.</p>
+    <img src="logo.png" alt="VDTA Logo" class="logo">
+    <h1>VDTA Solutions</h1>
+    <p class="slogan">Empowering Your Digital Future</p>
     
-    <input type="number" id="phoneInput" placeholder="Registered Phone Number">
-    <button onclick="login()">Access Profile</button>
+    <input type="number" id="phoneInput" placeholder="Enter Mobile Number">
+    
+    <div class="button-group">
+        <button class="btn-login" onclick="login()">Login</button>
+        <button class="btn-signup" onclick="signup()">Sign Up</button>
+    </div>
 </div>
 
 <script>
@@ -69,6 +80,11 @@
         } else {
             alert("Please enter a valid 10-digit phone number.");
         }
+    }
+
+    function signup() {
+        // You can change "app.html" to your registration page file name
+        window.location.href = "app.html";
     }
 </script>
 
