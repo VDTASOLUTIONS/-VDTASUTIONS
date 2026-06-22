@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Client Profile | VDTA Solutions</title>
     <style>
-        body { font-family: Arial, sans-serif; background: #0b1220; color: white; padding: 20px; }
-        .card { background: #1e293b; padding: 20px; border-radius: 12px; max-width: 500px; margin: auto; }
+        body { font-family: 'Segoe UI', sans-serif; background: #0b1220; color: white; padding: 20px; }
+        .card { background: #1e293b; padding: 25px; border-radius: 20px; max-width: 500px; margin: auto; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 8px 32px rgba(0,0,0,0.3); }
         .row { border-bottom: 1px solid #334155; padding: 12px 0; display: flex; justify-content: space-between; }
         .row b { color: #60a5fa; }
         .back-btn { background: #64748b; color: white; padding: 10px 20px; border: none; border-radius: 8px; cursor: pointer; margin-bottom: 20px; }
@@ -45,8 +45,8 @@
             }
 
             try {
-                // Pointing to collection "Clients" (Capital C)
-                const docRef = doc(db, "Clients", phone);
+                // Correctly pointing to 'clients' (lowercase)
+                const docRef = doc(db, "clients", phone);
                 const snap = await getDoc(docRef);
 
                 if (snap.exists()) {
@@ -63,11 +63,10 @@
                         <div class="row"><b>Payment Status:</b> <span>${d.PaymentStatus || 'N/A'}</span></div>
                     `;
                 } else {
-                    document.getElementById("details").innerHTML = "No client found for this number in the 'Clients' collection.";
+                    document.getElementById("details").innerHTML = "No client found for this number.";
                 }
             } catch (error) {
-                document.getElementById("details").innerHTML = "Database Error: Please check your Firebase configuration.";
-                console.error("Fetch Error:", error);
+                document.getElementById("details").innerHTML = "Database Error.";
             }
         }
         loadData();
