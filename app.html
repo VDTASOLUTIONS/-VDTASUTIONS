@@ -3,73 +3,104 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VDTA Dashboard</title>
+    <title>VDTA Solutions | Official Portal</title>
     <style>
-        body { margin:0; font-family:Arial, sans-serif; background:#0b1220; color:white; }
-        header { display:flex; justify-content:space-between; align-items:center; padding:12px 16px; background:#111827; }
-        .logo { display:flex; align-items:center; gap:10px; }
-        .logo img { width:35px; height:35px; border-radius:10px; }
-        .logout { background:#ef4444; border:none; color:white; padding:8px 10px; border-radius:8px; cursor:pointer; font-size:12px; }
-        .profile { background:#1e293b; margin:15px; padding:15px; border-radius:12px; }
-        input, textarea { width:100%; padding:10px; margin:5px 0; border:none; border-radius:8px; outline:none; font-size:12px; box-sizing:border-box; }
-        button { margin-top:8px; padding:8px 10px; border:none; border-radius:8px; background:#2563eb; color:white; cursor:pointer; font-size:12px; }
-        .container { padding:15px; display:grid; grid-template-columns:repeat(2,1fr); gap:12px; }
-        .card { background:#1e293b; padding:15px; border-radius:12px; text-align:center; }
+        body { 
+            margin: 0; 
+            font-family: 'Segoe UI', sans-serif; 
+            background: #0f172a; 
+            color: #f8fafc; 
+            display: flex; 
+            flex-direction: column; 
+            min-height: 100vh;
+        }
+        header { 
+            padding: 25px; 
+            display: flex; 
+            align-items: center; 
+            gap: 20px; 
+            background: #1e293b; 
+            border-bottom: 3px solid #3b82f6; 
+        }
+        header img { 
+            width: 60px; 
+            height: 60px; 
+            border-radius: 12px; 
+            object-fit: cover;
+        }
+        header h1 { 
+            margin: 0; 
+            font-size: 24px; 
+            letter-spacing: 1px;
+            color: #ffffff; 
+        }
+        .main-container { 
+            max-width: 450px; 
+            margin: 60px auto; 
+            padding: 40px; 
+            background: #ffffff; 
+            border-radius: 16px; 
+            color: #1e293b; 
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3); 
+        }
+        h2 { 
+            margin-top: 0; 
+            color: #0f172a; 
+            text-align: center;
+        }
+        p { 
+            color: #64748b; 
+            text-align: center; 
+            margin-bottom: 30px; 
+        }
+        input { 
+            width: 100%; 
+            padding: 15px; 
+            margin-bottom: 20px; 
+            border: 2px solid #e2e8f0; 
+            border-radius: 8px; 
+            box-sizing: border-box; 
+            font-size: 16px; 
+            outline: none;
+        }
+        input:focus { border-color: #3b82f6; }
+        button { 
+            width: 100%; 
+            padding: 15px; 
+            background: #3b82f6; 
+            border: none; 
+            border-radius: 8px; 
+            color: white; 
+            font-weight: bold; 
+            cursor: pointer; 
+            font-size: 16px; 
+            transition: background 0.3s; 
+        }
+        button:hover { background: #2563eb; }
     </style>
 </head>
 <body>
 
 <header>
-    <div class="logo">
-        <img src="Image.png" alt="Logo">
-        <h1>VDTA</h1>
-    </div>
-    <button class="logout" onclick="logout()">Logout</button>
+    <img src="logo.png" alt="Company Logo">
+    <h1>VDTA Solutions</h1>
 </header>
 
-<div class="profile">
-    <h3>Your Profile</h3>
-    <input id="name" placeholder="Full Name">
-    <input id="number" placeholder="Phone Number">
-    <textarea id="address" placeholder="Address"></textarea>
-    <input id="dob" type="date">
-    <button onclick="saveProfile()">Save</button>
-    <p id="showProfile"></p>
-</div>
-
-<div class="container">
-    <div class="card">
-        <h2>Track Payment</h2>
-        <input id="trackNumber" placeholder="Enter Phone Number">
-        <button onclick="trackPayment()">Track</button>
-    </div>
+<div class="main-container">
+    <h2>Client Verification</h2>
+    <p>Enter the registered 10-digit phone number below.</p>
+    <input id="trackNumber" type="number" placeholder="Phone Number">
+    <button onclick="trackPayment()">View Profile</button>
 </div>
 
 <script>
-    function saveProfile(){
-        const data = {
-            name: document.getElementById("name").value,
-            number: document.getElementById("number").value,
-            address: document.getElementById("address").value,
-            dob: document.getElementById("dob").value
-        };
-        localStorage.setItem("profile", JSON.stringify(data));
-        alert("Saved");
-    }
-
-    // This is the function that makes it work
     function trackPayment(){
         let n = document.getElementById("trackNumber").value.trim();
-        if(!n){
-            alert("Please enter a phone number!");
-            return;
+        if(n.length < 10){ 
+            alert("Please enter a valid 10-digit phone number!"); 
+            return; 
         }
-        // Redirects to profile page with the number
         window.location.href = "profile.html?phone=" + n;
-    }
-
-    function logout(){
-        window.location.href = "index.html";
     }
 </script>
 
