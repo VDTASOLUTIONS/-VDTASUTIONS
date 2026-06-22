@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Client Profile | VDTA Solutions</title>
     <style>
-        body { margin:0; font-family:Arial; background:#0b1220; color:white; }
-        header { display:flex; justify-content:space-between; align-items:center; padding:12px 16px; background:#111827; }
+        body { margin:0; font-family:Arial, sans-serif; background:#0b1220; color:white; }
+        header { display:flex; justify-content:space-between; align-items:center; padding:15px 20px; background:#111827; }
         .logo { display:flex; align-items:center; gap:10px; }
         .logo img { width:35px; height:35px; border-radius:10px; }
         .profile-card { background:#1e293b; margin:20px; padding:20px; border-radius:12px; }
-        .data-row { margin-bottom:15px; border-bottom:1px solid #334155; padding-bottom:5px; }
-        .btn-back { background:#64748b; border:none; color:white; padding:8px 15px; border-radius:8px; cursor:pointer; }
+        .data-row { margin-bottom:15px; border-bottom:1px solid #334155; padding-bottom:8px; font-size: 16px; }
+        .btn-back { background:#64748b; border:none; color:white; padding:10px 20px; border-radius:8px; cursor:pointer; }
     </style>
 </head>
 <body>
@@ -33,7 +33,6 @@
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
     import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
 
-    // IMPORTANT: Ensure this config matches your other files exactly
     const firebaseConfig = {
       apiKey: "AIzaSyAf79JVQOwBC6NXzTpJvg6DgZFM9A3gtz8",
       authDomain: "vdta-solutions7.firebaseapp.com",
@@ -44,7 +43,6 @@
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
 
-    // This grabs the phone number from the URL
     const params = new URLSearchParams(window.location.search);
     const phone = params.get('phone');
 
@@ -61,19 +59,21 @@
             if (docSnap.exists()) {
                 const d = docSnap.data();
                 document.getElementById("clientDetails").innerHTML = `
-                    <div class="data-row"><b>Full Name:</b> ${d.fullName}</div>
-                    <div class="data-row"><b>Number:</b> ${d.number}</div>
-                    <div class="data-row"><b>Address:</b> ${d.address}</div>
-                    <div class="data-row"><b>PAN Card:</b> ${d.panCard}</div>
-                    <div class="data-row"><b>Date of Birth:</b> ${d.dob}</div>
-                    <div class="data-row"><b>Amount:</b> ${d.amount}</div>
-                    <div class="data-row"><b>Process Complete:</b> ${d.progress}%</div>
+                    <div class="data-row"><b>Name:</b> ${d.Name || 'N/A'}</div>
+                    <div class="data-row"><b>Number:</b> ${d.Number || 'N/A'}</div>
+                    <div class="data-row"><b>Address:</b> ${d.Address || 'N/A'}</div>
+                    <div class="data-row"><b>PAN Card:</b> ${d.Pancard || 'N/A'}</div>
+                    <div class="data-row"><b>Date of Birth:</b> ${d.DOB || 'N/A'}</div>
+                    <div class="data-row"><b>Account No:</b> ${d.AccountNo || 'N/A'}</div>
+                    <div class="data-row"><b>Bank Name:</b> ${d.BankName || 'N/A'}</div>
+                    <div class="data-row"><b>Amount Pending:</b> ${d.AmountPending || 'N/A'}</div>
+                    <div class="data-row"><b>Payment Status:</b> ${d.PaymentStatus || 'N/A'}</div>
                 `;
             } else {
                 document.getElementById("clientDetails").innerHTML = "Client not found in database.";
             }
         } catch (e) {
-            document.getElementById("clientDetails").innerHTML = "Error loading data.";
+            document.getElementById("clientDetails").innerHTML = "Error loading data. Please check your internet connection.";
         }
     }
     fetchClient();
