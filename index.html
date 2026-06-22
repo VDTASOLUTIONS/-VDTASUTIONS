@@ -1,19 +1,35 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>VDTA Solutions | Official Portal</title>
+    <style>
+        body { font-family: sans-serif; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; background: #f8fafc; }
+        .card { background: white; padding: 30px; border-radius: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); width: 300px; text-align: center; }
+        input { width: 100%; padding: 12px; margin: 15px 0; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; }
+        button { width: 100%; padding: 12px; background: #0f172a; color: white; border: none; border-radius: 8px; cursor: pointer; }
+    </style>
+</head>
 <body>
-    <input type="tel" id="phone" placeholder="Enter Phone Number">
-    <button onclick="login()">Enter Application</button>
 
-    <script>
-        function login() {
-            const phone = document.getElementById("phone").value;
-            if (phone.length > 9) {
-                // This simple logic just sends them to your app page
-                window.location.href = "app.html";
-            } else {
-                alert("Please enter a valid number");
-            }
+<div class="card">
+    <h1>Login</h1>
+    <input type="tel" id="phoneInput" placeholder="Enter Mobile Number">
+    <button onclick="goToProfile()">Enter Application</button>
+</div>
+
+<script>
+    function goToProfile() {
+        const phone = document.getElementById('phoneInput').value;
+        if(phone.length >= 10) {
+            // Save the number so your next page can use it
+            localStorage.setItem('userPhone', phone);
+            window.location.href = "profile.html";
+        } else {
+            alert("Please enter a valid mobile number.");
         }
-    </script>
+    }
+</script>
+
 </body>
 </html>
