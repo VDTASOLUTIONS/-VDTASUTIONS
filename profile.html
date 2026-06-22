@@ -3,22 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Client Profile | VDTA Solutions</title>
+    <title>Client Details | VDTA Solutions</title>
     <style>
-        body { font-family: 'Segoe UI', sans-serif; background: #0b1220; color: white; padding: 20px; }
-        .card { background: #1e293b; padding: 25px; border-radius: 20px; max-width: 500px; margin: auto; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 8px 32px rgba(0,0,0,0.3); }
-        .row { border-bottom: 1px solid #334155; padding: 12px 0; display: flex; justify-content: space-between; }
-        .row b { color: #60a5fa; }
-        .back-btn { background: #64748b; color: white; padding: 10px 20px; border: none; border-radius: 8px; cursor: pointer; margin-bottom: 20px; }
+        body { 
+            font-family: 'Segoe UI', sans-serif; 
+            background: #0f172a; 
+            color: #1e293b; 
+            padding: 20px; 
+            min-height: 100vh;
+        }
+        .nav { 
+            max-width: 600px; 
+            margin: 0 auto 20px auto; 
+        }
+        .back-btn { 
+            padding: 10px 20px; 
+            background: #3b82f6; 
+            color: white; 
+            border: none; 
+            border-radius: 8px; 
+            cursor: pointer; 
+            font-weight: bold;
+        }
+        .card { 
+            max-width: 600px; 
+            margin: auto; 
+            background: white; 
+            padding: 40px; 
+            border-radius: 16px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2); 
+        }
+        h2 { 
+            color: #0f172a; 
+            border-bottom: 2px solid #3b82f6; 
+            padding-bottom: 15px; 
+            margin-bottom: 30px; 
+        }
+        .row { 
+            display: flex; 
+            justify-content: space-between; 
+            padding: 15px 0; 
+            border-bottom: 1px solid #f1f5f9; 
+        }
+        .row b { color: #64748b; }
+        .row span { font-weight: 600; color: #0f172a; }
+        #details { text-align: center; font-size: 1.1em; color: #475569; }
     </style>
 </head>
 <body>
 
-    <button class="back-btn" onclick="window.history.back()">Back</button>
+    <div class="nav">
+        <button class="back-btn" onclick="window.history.back()">← Back to Dashboard</button>
+    </div>
 
     <div class="card">
-        <h2>Client Details</h2>
-        <div id="details">Loading client information...</div>
+        <h2>Client Profile</h2>
+        <div id="details">Loading official record...</div>
     </div>
 
     <script type="module">
@@ -31,7 +71,6 @@
             projectId: "vdta-solutions7",
             appId: "1:440787032300:web:326b66d60acae019baadc9"
         };
-
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
@@ -40,33 +79,33 @@
 
         async function loadData() {
             if (!phone) {
-                document.getElementById("details").innerHTML = "Error: No phone number provided.";
+                document.getElementById("details").innerHTML = "No phone number provided.";
                 return;
             }
 
             try {
-                // This line is now set to "clients" (lowercase) to match your Firebase database
+                // Looking at 'clients' collection
                 const docRef = doc(db, "clients", phone);
                 const snap = await getDoc(docRef);
 
                 if (snap.exists()) {
                     const d = snap.data();
                     document.getElementById("details").innerHTML = `
-                        <div class="row"><b>Name:</b> <span>${d.Name || 'N/A'}</span></div>
-                        <div class="row"><b>Number:</b> <span>${d.Number || 'N/A'}</span></div>
-                        <div class="row"><b>Address:</b> <span>${d.Address || 'N/A'}</span></div>
-                        <div class="row"><b>PAN Card:</b> <span>${d.Pancard || 'N/A'}</span></div>
-                        <div class="row"><b>Date of Birth:</b> <span>${d.DOB || 'N/A'}</span></div>
-                        <div class="row"><b>Account No:</b> <span>${d.AccountNo || 'N/A'}</span></div>
-                        <div class="row"><b>Bank Name:</b> <span>${d.BankName || 'N/A'}</span></div>
-                        <div class="row"><b>Amount Pending:</b> <span>${d.AmountPending || 'N/A'}</span></div>
-                        <div class="row"><b>Payment Status:</b> <span>${d.PaymentStatus || 'N/A'}</span></div>
+                        <div class="row"><b>Full Name</b> <span>${d.Name || 'N/A'}</span></div>
+                        <div class="row"><b>Phone Number</b> <span>${d.Number || 'N/A'}</span></div>
+                        <div class="row"><b>Address</b> <span>${d.Address || 'N/A'}</span></div>
+                        <div class="row"><b>PAN Card</b> <span>${d.Pancard || 'N/A'}</span></div>
+                        <div class="row"><b>Date of Birth</b> <span>${d.DOB || 'N/A'}</span></div>
+                        <div class="row"><b>Bank Name</b> <span>${d.BankName || 'N/A'}</span></div>
+                        <div class="row"><b>Account No</b> <span>${d.AccountNo || 'N/A'}</span></div>
+                        <div class="row"><b>Pending Amount</b> <span>${d.AmountPending || 'N/A'}</span></div>
+                        <div class="row"><b>Status</b> <span style="color: #059669;">${d.PaymentStatus || 'N/A'}</span></div>
                     `;
                 } else {
-                    document.getElementById("details").innerHTML = "No client found for this number in the 'clients' collection.";
+                    document.getElementById("details").innerHTML = "Record not found for this number.";
                 }
-            } catch (error) {
-                document.getElementById("details").innerHTML = "Database Error: " + error.message;
+            } catch (e) {
+                document.getElementById("details").innerHTML = "Error loading record. Please try again.";
             }
         }
         loadData();
