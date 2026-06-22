@@ -45,25 +45,25 @@
             }
 
             try {
-                // Fetching from the 'clients' collection using the Document ID (phone number)
-                const docRef = doc(db, "clients", phone);
+                // Pointing to collection "Clients" (Capital C)
+                const docRef = doc(db, "Clients", phone);
                 const snap = await getDoc(docRef);
 
                 if (snap.exists()) {
                     const d = snap.data();
                     document.getElementById("details").innerHTML = `
-                        <div class="row"><b>Name:</b> <span>${d.Name}</span></div>
-                        <div class="row"><b>Number:</b> <span>${d.Number}</span></div>
-                        <div class="row"><b>Address:</b> <span>${d.Address}</span></div>
-                        <div class="row"><b>PAN Card:</b> <span>${d.Pancard}</span></div>
-                        <div class="row"><b>Date of Birth:</b> <span>${d.DOB}</span></div>
-                        <div class="row"><b>Account No:</b> <span>${d.AccountNo}</span></div>
-                        <div class="row"><b>Bank Name:</b> <span>${d.BankName}</span></div>
-                        <div class="row"><b>Amount Pending:</b> <span>${d.AmountPending}</span></div>
-                        <div class="row"><b>Payment Status:</b> <span>${d.PaymentStatus}</span></div>
+                        <div class="row"><b>Name:</b> <span>${d.Name || 'N/A'}</span></div>
+                        <div class="row"><b>Number:</b> <span>${d.Number || 'N/A'}</span></div>
+                        <div class="row"><b>Address:</b> <span>${d.Address || 'N/A'}</span></div>
+                        <div class="row"><b>PAN Card:</b> <span>${d.Pancard || 'N/A'}</span></div>
+                        <div class="row"><b>Date of Birth:</b> <span>${d.DOB || 'N/A'}</span></div>
+                        <div class="row"><b>Account No:</b> <span>${d.AccountNo || 'N/A'}</span></div>
+                        <div class="row"><b>Bank Name:</b> <span>${d.BankName || 'N/A'}</span></div>
+                        <div class="row"><b>Amount Pending:</b> <span>${d.AmountPending || 'N/A'}</span></div>
+                        <div class="row"><b>Payment Status:</b> <span>${d.PaymentStatus || 'N/A'}</span></div>
                     `;
                 } else {
-                    document.getElementById("details").innerHTML = "No client found for this number.";
+                    document.getElementById("details").innerHTML = "No client found for this number in the 'Clients' collection.";
                 }
             } catch (error) {
                 document.getElementById("details").innerHTML = "Database Error: Please check your Firebase configuration.";
