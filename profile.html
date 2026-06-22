@@ -45,7 +45,7 @@
             }
 
             try {
-                // Correctly pointing to 'clients' (lowercase)
+                // This line is now set to "clients" (lowercase) to match your Firebase database
                 const docRef = doc(db, "clients", phone);
                 const snap = await getDoc(docRef);
 
@@ -63,10 +63,10 @@
                         <div class="row"><b>Payment Status:</b> <span>${d.PaymentStatus || 'N/A'}</span></div>
                     `;
                 } else {
-                    document.getElementById("details").innerHTML = "No client found for this number.";
+                    document.getElementById("details").innerHTML = "No client found for this number in the 'clients' collection.";
                 }
             } catch (error) {
-                document.getElementById("details").innerHTML = "Database Error.";
+                document.getElementById("details").innerHTML = "Database Error: " + error.message;
             }
         }
         loadData();
