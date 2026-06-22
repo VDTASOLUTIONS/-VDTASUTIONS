@@ -3,96 +3,72 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VDTA Solutions | Official Portal</title>
+    <title>VDTA Solutions | Secure Client Login</title>
     <style>
         body { 
             margin: 0; 
-            font-family: 'Segoe UI', sans-serif; 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
             background: #0f172a; 
-            color: #f8fafc; 
             display: flex; 
-            flex-direction: column; 
+            justify-content: center; 
+            align-items: center; 
             min-height: 100vh;
         }
-        header { 
-            padding: 25px; 
-            display: flex; 
-            align-items: center; 
-            gap: 20px; 
-            background: #1e293b; 
-            border-bottom: 3px solid #3b82f6; 
-        }
-        header img { 
-            width: 60px; 
-            height: 60px; 
-            border-radius: 12px; 
-            object-fit: cover;
-        }
-        header h1 { 
-            margin: 0; 
-            font-size: 24px; 
-            letter-spacing: 1px;
-            color: #ffffff; 
-        }
-        .main-container { 
-            max-width: 450px; 
-            margin: 60px auto; 
-            padding: 40px; 
+        .login-card { 
             background: #ffffff; 
-            border-radius: 16px; 
-            color: #1e293b; 
-            box-shadow: 0 10px 25px rgba(0,0,0,0.3); 
+            padding: 40px; 
+            border-radius: 20px; 
+            width: 100%; 
+            max-width: 400px; 
+            text-align: center; 
+            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.3);
         }
-        h2 { margin-top: 0; color: #0f172a; text-align: center; }
-        p { color: #64748b; text-align: center; margin-bottom: 30px; }
+        .login-card img { width: 80px; margin-bottom: 20px; }
+        h2 { color: #1e293b; margin-bottom: 10px; }
+        p { color: #64748b; margin-bottom: 30px; font-size: 0.9em; }
         input { 
             width: 100%; 
-            padding: 15px; 
+            padding: 14px; 
             margin-bottom: 20px; 
             border: 2px solid #e2e8f0; 
-            border-radius: 8px; 
+            border-radius: 10px; 
             box-sizing: border-box; 
             font-size: 16px; 
-            outline: none;
         }
-        input:focus { border-color: #3b82f6; }
         button { 
             width: 100%; 
-            padding: 15px; 
+            padding: 14px; 
             background: #3b82f6; 
-            border: none; 
-            border-radius: 8px; 
             color: white; 
+            border: none; 
+            border-radius: 10px; 
+            font-size: 16px; 
             font-weight: bold; 
             cursor: pointer; 
-            font-size: 16px; 
-            transition: background 0.3s; 
+            transition: background 0.3s;
         }
         button:hover { background: #2563eb; }
     </style>
 </head>
 <body>
 
-<header>
-    <img src="logo.png" alt="Company Logo">
-    <h1>VDTA Solutions</h1>
-</header>
-
-<div class="main-container">
-    <h2>Client Verification</h2>
-    <p>Enter the registered 10-digit phone number below.</p>
-    <input id="trackNumber" type="number" placeholder="Phone Number">
-    <button onclick="trackPayment()">View Profile</button>
+<div class="login-card">
+    <img src="logo.png" alt="Logo">
+    <h2>Welcome Back</h2>
+    <p>Please enter your registered mobile number to access your account.</p>
+    
+    <input type="number" id="phoneInput" placeholder="Registered Phone Number">
+    <button onclick="login()">Access Profile</button>
 </div>
 
 <script>
-    function trackPayment(){
-        let n = document.getElementById("trackNumber").value.trim();
-        if(n.length < 10){ 
-            alert("Please enter a valid 10-digit phone number!"); 
-            return; 
+    function login() {
+        const phone = document.getElementById("phoneInput").value.trim();
+        if (phone.length === 10) {
+            window.location.href = "profile.html?phone=" + phone;
+        } else {
+            alert("Please enter a valid 10-digit phone number.");
         }
-        window.location.href = "profile.html?phone=" + n;
     }
 </script>
 
