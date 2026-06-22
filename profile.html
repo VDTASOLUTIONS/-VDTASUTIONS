@@ -45,6 +45,7 @@
             }
 
             try {
+                // Ensure the collection name is 'clients'
                 const docRef = doc(db, "clients", phone);
                 const snap = await getDoc(docRef);
 
@@ -62,11 +63,10 @@
                         <div class="row"><b>Payment Status:</b> <span>${d.PaymentStatus || 'N/A'}</span></div>
                     `;
                 } else {
-                    document.getElementById("details").innerHTML = "Client not found. Please verify the number.";
+                    document.getElementById("details").innerHTML = "Client not found. Verify that the Document ID in Firestore is exactly: " + phone;
                 }
             } catch (error) {
                 document.getElementById("details").innerHTML = "Error connecting to database.";
-                console.error(error);
             }
         }
         loadData();
