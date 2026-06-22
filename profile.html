@@ -2,113 +2,46 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Client Details | VDTA Solutions</title>
+    <title>User Profile</title>
     <style>
-        body { 
-            font-family: 'Segoe UI', sans-serif; 
-            background: #0f172a; 
-            color: #1e293b; 
-            padding: 20px; 
-            min-height: 100vh;
-        }
-        .nav { 
-            max-width: 600px; 
-            margin: 0 auto 20px auto; 
-        }
-        .back-btn { 
-            padding: 10px 20px; 
-            background: #3b82f6; 
-            color: white; 
-            border: none; 
-            border-radius: 8px; 
-            cursor: pointer; 
-            font-weight: bold;
-        }
-        .card { 
-            max-width: 600px; 
-            margin: auto; 
-            background: white; 
-            padding: 40px; 
-            border-radius: 16px; 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2); 
-        }
-        h2 { 
-            color: #0f172a; 
-            border-bottom: 2px solid #3b82f6; 
-            padding-bottom: 15px; 
-            margin-bottom: 30px; 
-        }
-        .row { 
-            display: flex; 
-            justify-content: space-between; 
-            padding: 15px 0; 
-            border-bottom: 1px solid #f1f5f9; 
-        }
-        .row b { color: #64748b; }
-        .row span { font-weight: 600; color: #0f172a; }
-        #details { text-align: center; font-size: 1.1em; color: #475569; }
+        body { font-family: sans-serif; display: flex; flex-direction: column; align-items: center; padding: 20px; background: #f8fafc; }
+        .card { background: white; padding: 30px; border-radius: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); width: 100%; max-width: 400px; }
     </style>
 </head>
 <body>
 
-    <div class="nav">
-        <button class="back-btn" onclick="window.history.back()">← Back to Dashboard</button>
+<div class="card">
+    <h2>Your Profile</h2>
+    <p><strong>Logged in as:</strong> <span id="displayPhone"></span></p>
+    <div id="profileDetails">
+        <!-- Your specific details will appear here -->
     </div>
+    <button onclick="window.location.href='index.html'">Logout</button>
+</div>
 
-    <div class="card">
-        <h2>Client Profile</h2>
-        <div id="details">Loading official record...</div>
-    </div>
+<script>
+    // 1. Get the number from the login page
+    const userPhone = localStorage.getItem('userPhone');
 
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
-        import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+    // 2. Display the number
+    if (userPhone) {
+        document.getElementById('displayPhone').innerText = userPhone;
 
-        const firebaseConfig = {
-            apiKey: "AIzaSyAf79JVQOwBC6NXzTpJvg6DgZFM9A3gtz8",
-            authDomain: "vdta-solutions7.firebaseapp.com",
-            projectId: "vdta-solutions7",
-            appId: "1:440787032300:web:326b66d60acae019baadc9"
-        };
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
-
-        const params = new URLSearchParams(window.location.search);
-        const phone = params.get('phone');
-
-        async function loadData() {
-            if (!phone) {
-                document.getElementById("details").innerHTML = "No phone number provided.";
-                return;
-            }
-
-            try {
-                // Looking at 'clients' collection
-                const docRef = doc(db, "clients", phone);
-                const snap = await getDoc(docRef);
-
-                if (snap.exists()) {
-                    const d = snap.data();
-                    document.getElementById("details").innerHTML = `
-                        <div class="row"><b>Full Name</b> <span>${d.Name || 'N/A'}</span></div>
-                        <div class="row"><b>Phone Number</b> <span>${d.Number || 'N/A'}</span></div>
-                        <div class="row"><b>Address</b> <span>${d.Address || 'N/A'}</span></div>
-                        <div class="row"><b>PAN Card</b> <span>${d.Pancard || 'N/A'}</span></div>
-                        <div class="row"><b>Date of Birth</b> <span>${d.DOB || 'N/A'}</span></div>
-                        <div class="row"><b>Bank Name</b> <span>${d.BankName || 'N/A'}</span></div>
-                        <div class="row"><b>Account No</b> <span>${d.AccountNo || 'N/A'}</span></div>
-                        <div class="row"><b>Pending Amount</b> <span>${d.AmountPending || 'N/A'}</span></div>
-                        <div class="row"><b>Status</b> <span style="color: #059669;">${d.PaymentStatus || 'N/A'}</span></div>
-                    `;
-                } else {
-                    document.getElementById("details").innerHTML = "Record not found for this number.";
-                }
-            } catch (e) {
-                document.getElementById("details").innerHTML = "Error loading record. Please try again.";
-            }
+        // 3. Logic to show your specific profile details
+        if (userPhone === "7016437834") {
+            document.getElementById('profileDetails').innerHTML = `
+                <p>Name: User Name</p>
+                <p>Status: Active</p>
+                <p>Other Details: Your info goes here</p>
+            `;
+        } else {
+            document.getElementById('profileDetails').innerHTML = "<p>No profile found for this number.</p>";
         }
-        loadData();
-    </script>
+    } else {
+        // If no number is found, go back to login
+        window.location.href = "index.html";
+    }
+</script>
+
 </body>
 </html>
