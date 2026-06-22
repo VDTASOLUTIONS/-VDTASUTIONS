@@ -2,72 +2,50 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VDTA Solutions | Official Portal</title>
-    
+    <title>Login</title>
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
         import { getAuth } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
-        // --- PASTE YOUR FIREBASE CONFIG BELOW THIS LINE ---
+        // EDIT ONLY THE LINES BELOW
         const firebaseConfig = {
-            apiKey: "PASTE_YOUR_API_KEY_HERE",
+            apiKey: "PASTE_YOUR_AIza_KEY_HERE",
             authDomain: "vdta-solutions7.firebaseapp.com",
             projectId: "vdta-solutions7",
             storageBucket: "vdta-solutions7.appspot.com",
-            messagingSenderId: "PASTE_YOUR_SENDER_ID_HERE",
-            appId: "PASTE_YOUR_APP_ID_HERE"
+            messagingSenderId: "PASTE_YOUR_SENDER_ID",
+            appId: "PASTE_YOUR_APP_ID"
         };
-        // --- DO NOT EDIT BELOW THIS LINE ---
+        // EDIT ONLY THE LINES ABOVE
 
-        const app = initializeApp(firebaseConfig);
-        window.auth = getAuth(app);
+        window.auth = getAuth(initializeApp(firebaseConfig));
     </script>
-
-    <style>
-        body { font-family: sans-serif; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; background: #f8fafc; }
-        .card { background: white; padding: 25px; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); width: 300px; text-align: center; }
-        input { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; }
-        button { width: 100%; padding: 10px; background: #0f172a; color: white; border: none; border-radius: 5px; cursor: pointer; }
-    </style>
 </head>
 <body>
-
-<div class="card">
-    <h3>Login</h3>
     <div id="recaptcha-container"></div>
     <input type="tel" id="phone" placeholder="+91XXXXXXXXXX">
-    <button onclick="sendCode()">Send OTP</button>
-    <input type="number" id="otp" placeholder="Enter OTP">
-    <button onclick="verifyCode()">Verify</button>
-</div>
+    <button onclick="sendOTP()">Send OTP</button>
+    <input type="number" id="otp" placeholder="OTP">
+    <button onclick="verifyOTP()">Verify</button>
 
-<script type="module">
-    import { RecaptchaVerifier, signInWithPhoneNumber } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+    <script type="module">
+        import { RecaptchaVerifier, signInWithPhoneNumber } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+        
+        window.recaptchaVerifier = new RecaptchaVerifier(window.auth, 'recaptcha-container', { 'size': 'invisible' });
 
-    window.recaptchaVerifier = new RecaptchaVerifier(window.auth, 'recaptcha-container', { 'size': 'invisible' });
+        window.sendOTP = async () => {
+            try {
+                window.confirmationResult = await signInWithPhoneNumber(window.auth, document.getElementById('phone').value, window.recaptchaVerifier);
+                alert("OTP Sent!");
+            } catch (e) { alert(e.message); }
+        };
 
-    window.sendCode = async () => {
-        const phone = document.getElementById('phone').value;
-        try {
-            window.confirmationResult = await signInWithPhoneNumber(window.auth, phone, window.recaptchaVerifier);
-            alert("OTP Sent! Check your phone.");
-        } catch (e) { 
-            console.error(e);
-            alert("Error: " + e.message); 
-        }
-    };
-
-    window.verifyCode = async () => {
-        const code = document.getElementById('otp').value;
-        try {
-            await window.confirmationResult.confirm(code);
-            window.location.href = "profile.html";
-        } catch (e) { 
-            alert("Invalid OTP or expired."); 
-        }
-    };
-</script>
-
+        window.verifyOTP = async () => {
+            try {
+                await window.confirmationResult.confirm(document.getElementById('otp').value);
+                window.location.href = "profile.html";
+            } catch (e) { alert("Invalid OTP"); }
+        };
+    </script>
 </body>
 </html>
