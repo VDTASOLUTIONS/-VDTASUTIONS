@@ -1,197 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>VDTA Solutions</title>
-
-<style>
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial,sans-serif;
-}
-
-body{
-background:#0f172a;
-color:white;
-}
-
-header{
-padding:20px;
-display:flex;
-justify-content:space-between;
-align-items:center;
-background:#111827;
-}
-
-.logo{
-display:flex;
-align-items:center;
-gap:10px;
-font-size:24px;
-font-weight:bold;
-}
-
-.logo img{
-height:40px;
-width:40px;
-border-radius:8px;
-}
-
-.hero{
-height:85vh;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-text-align:center;
-padding:20px;
-}
-
-.hero h1{
-font-size:48px;
-margin-bottom:15px;
-}
-
-.hero p{
-font-size:20px;
-margin-bottom:30px;
-color:#cbd5e1;
-}
-
-.btns{
-display:flex;
-gap:15px;
-}
-
-button{
-padding:14px 30px;
-border:none;
-border-radius:10px;
-font-size:16px;
-cursor:pointer;
-}
-
-.login{
-background:white;
-color:black;
-}
-
-.signup{
-background:#2563eb;
-color:white;
-}
-
-.services{
-padding:60px 20px;
-text-align:center;
-}
-
-.card{
-background:#1e293b;
-padding:20px;
-margin:15px;
-border-radius:12px;
-}
-
-footer{
-padding:20px;
-text-align:center;
-color:#94a3b8;
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VDTA Solutions | Official Portal</title>
+    <style>
+        body { 
+            margin: 0; 
+            font-family: 'Segoe UI', sans-serif; 
+            background: #0f172a; 
+            color: #f8fafc; 
+            display: flex; 
+            flex-direction: column; 
+            min-height: 100vh;
+        }
+        header { 
+            padding: 25px; 
+            display: flex; 
+            align-items: center; 
+            gap: 20px; 
+            background: #1e293b; 
+            border-bottom: 3px solid #3b82f6; 
+        }
+        header img { 
+            width: 60px; 
+            height: 60px; 
+            border-radius: 12px; 
+            object-fit: cover;
+        }
+        header h1 { 
+            margin: 0; 
+            font-size: 24px; 
+            letter-spacing: 1px;
+            color: #ffffff; 
+        }
+        .main-container { 
+            max-width: 450px; 
+            margin: 60px auto; 
+            padding: 40px; 
+            background: #ffffff; 
+            border-radius: 16px; 
+            color: #1e293b; 
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3); 
+        }
+        h2 { margin-top: 0; color: #0f172a; text-align: center; }
+        p { color: #64748b; text-align: center; margin-bottom: 30px; }
+        input { 
+            width: 100%; 
+            padding: 15px; 
+            margin-bottom: 20px; 
+            border: 2px solid #e2e8f0; 
+            border-radius: 8px; 
+            box-sizing: border-box; 
+            font-size: 16px; 
+            outline: none;
+        }
+        input:focus { border-color: #3b82f6; }
+        button { 
+            width: 100%; 
+            padding: 15px; 
+            background: #3b82f6; 
+            border: none; 
+            border-radius: 8px; 
+            color: white; 
+            font-weight: bold; 
+            cursor: pointer; 
+            font-size: 16px; 
+            transition: background 0.3s; 
+        }
+        button:hover { background: #2563eb; }
+    </style>
 </head>
-
 <body>
 
 <header>
-<div class="logo">
-<img src="logo.png" alt="Logo">
-VDTA Solutions
-</div>
+    <img src="logo.png" alt="Company Logo">
+    <h1>VDTA Solutions</h1>
 </header>
 
-<section class="hero">
-<h1>VDTA Solutions</h1>
-<p>One Solution. Endless Possibilities.</p>
-
-<div class="btns">
-<button class="login" onclick="login()">Login</button>
-<button class="signup" onclick="signup()">Sign Up</button>
-</div>
-</section>
-
-<section class="services">
-<h2>Our Services</h2>
-
-<div class="card">
-<h3>Website Development</h3>
-<p>Modern websites for businesses and startups.</p>
+<div class="main-container">
+    <h2>Client Verification</h2>
+    <p>Enter the registered 10-digit phone number below.</p>
+    <input id="trackNumber" type="number" placeholder="Phone Number">
+    <button onclick="trackPayment()">View Profile</button>
 </div>
 
-<div class="card">
-<h3>AI Solutions</h3>
-<p>Automation and AI-powered business tools.</p>
-</div>
-
-<div class="card">
-<h3>Digital Services</h3>
-<p>Everything your business needs in one place.</p>
-</div>
-</section>
-
-<footer>
-© 2026 VDTA Solutions. All Rights Reserved.
-</footer>
-
-<!-- FIREBASE SCRIPT -->
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } 
-from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
-
-const firebaseConfig = {
-  apiKey: "AIzaSyAf79JVQOwBC6NXzTpJvg6DgZFM9A3gtz8",
-  authDomain: "vdta-solutions7.firebaseapp.com",
-  projectId: "vdta-solutions7",
-  appId: "1:440787032300:web:326b66d60acae019baadc9"
-};
-
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-
-// LOGIN
-async function login() {
-  const email = prompt("Enter Email:");
-  const password = prompt("Enter Password:");
-
-  try {
-    await signInWithEmailAndPassword(auth, email, password);
-    alert("Login Successful!");
-    window.location.assign("app.html");
-  } catch (e) {
-    alert(e.message);
-  }
-}
-
-// SIGNUP
-async function signup() {
-  const email = prompt("Enter Email:");
-  const password = prompt("Enter Password:");
-
-  try {
-    await createUserWithEmailAndPassword(auth, email, password);
-    alert("Account Created Successfully!");
-    window.location.assign("app.html");
-  } catch (e) {
-    alert(e.message);
-  }
-}
-
-window.login = login;
-window.signup = signup;
+<script>
+    function trackPayment(){
+        let n = document.getElementById("trackNumber").value.trim();
+        if(n.length < 10){ 
+            alert("Please enter a valid 10-digit phone number!"); 
+            return; 
+        }
+        window.location.href = "profile.html?phone=" + n;
+    }
 </script>
 
 </body>
