@@ -5,74 +5,49 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VDTA Solutions | Official Portal</title>
     <style>
-        body { 
-            margin: 0; 
-            font-family: 'Segoe UI', sans-serif; 
-            background: #f8fafc; 
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-            min-height: 100vh;
-        }
-        .login-card { 
-            background: #ffffff; 
-            padding: 50px; 
-            border-radius: 24px; 
-            width: 100%; 
-            max-width: 420px; 
-            text-align: center; 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-        }
-        .logo { width: 120px; margin-bottom: 20px; }
-        h1 { color: #0f172a; margin: 0; font-size: 28px; font-weight: 700; }
-        .slogan { color: #64748b; font-size: 14px; margin-bottom: 30px; }
+        body { margin: 0; font-family: 'Segoe UI', sans-serif; background: #f8fafc; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
         
-        input { 
-            width: 100%; 
-            padding: 16px; 
-            margin-bottom: 20px; 
-            border: 2px solid #e2e8f0; 
-            border-radius: 12px; 
-            box-sizing: border-box; 
-            font-size: 16px;
-        }
-        
-        /* Button Container */
-        .button-group { display: flex; gap: 10px; }
-        
-        button { 
-            flex: 1; 
-            padding: 16px; 
-            border: none; 
-            border-radius: 12px; 
-            font-size: 15px; 
-            font-weight: 600; 
-            cursor: pointer; 
-            transition: all 0.3s;
-        }
+        /* Brand Section */
+        .brand-container { margin-bottom: 40px; }
+        .logo { width: 150px; margin-bottom: 15px; }
+        h1 { color: #0f172a; font-size: 36px; margin: 0; }
+        .slogan { color: #64748b; font-size: 18px; margin-top: 5px; }
+
+        /* Action Buttons */
+        .actions { display: flex; gap: 20px; justify-content: center; }
+        .btn { padding: 15px 40px; border-radius: 50px; font-weight: 600; cursor: pointer; border: none; font-size: 16px; transition: 0.3s; }
         .btn-login { background: #0f172a; color: white; }
-        .btn-login:hover { background: #334155; }
+        .btn-signup { background: transparent; color: #0f172a; border: 2px solid #0f172a; }
         
-        .btn-signup { background: #e2e8f0; color: #0f172a; }
-        .btn-signup:hover { background: #cbd5e1; }
+        /* The Form (Hidden by default) */
+        #loginForm { display: none; margin-top: 40px; background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); width: 100%; max-width: 350px; }
+        input { width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; }
     </style>
 </head>
 <body>
 
-<div class="login-card">
-    <img src="logo.png" alt="VDTA Logo" class="logo">
+<div class="brand-container">
+    <img src="logo.png" alt="Logo" class="logo">
     <h1>VDTA Solutions</h1>
-    <p class="slogan">Empowering Your Digital Future</p>
-    
+    <p class="slogan">Your Trusted Partner in Digital Excellence</p>
+</div>
+
+<div class="actions">
+    <button class="btn btn-login" onclick="showLogin()">Login</button>
+    <button class="btn btn-signup" onclick="window.location.href='app.html'">Sign Up</button>
+</div>
+
+<!-- Login Form hidden until clicked -->
+<div id="loginForm">
     <input type="number" id="phoneInput" placeholder="Enter Mobile Number">
-    
-    <div class="button-group">
-        <button class="btn-login" onclick="login()">Login</button>
-        <button class="btn-signup" onclick="signup()">Sign Up</button>
-    </div>
+    <button class="btn btn-login" style="width: 100%" onclick="login()">Verify Number</button>
 </div>
 
 <script>
+    function showLogin() {
+        document.getElementById('loginForm').style.display = 'block';
+    }
+
     function login() {
         const phone = document.getElementById("phoneInput").value.trim();
         if (phone.length === 10) {
@@ -80,11 +55,6 @@
         } else {
             alert("Please enter a valid 10-digit phone number.");
         }
-    }
-
-    function signup() {
-        // You can change "app.html" to your registration page file name
-        window.location.href = "app.html";
     }
 </script>
 
