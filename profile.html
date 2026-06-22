@@ -2,43 +2,56 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>User Profile</title>
+    <title>Client Profile</title>
     <style>
         body { font-family: sans-serif; display: flex; flex-direction: column; align-items: center; padding: 20px; background: #f8fafc; }
         .card { background: white; padding: 30px; border-radius: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); width: 100%; max-width: 400px; }
+        button { width: 100%; padding: 10px; margin-top: 20px; background: #ef4444; color: white; border: none; border-radius: 5px; cursor: pointer; }
     </style>
 </head>
 <body>
 
 <div class="card">
-    <h2>Your Profile</h2>
-    <p><strong>Logged in as:</strong> <span id="displayPhone"></span></p>
-    <div id="profileDetails">
-        <!-- Your specific details will appear here -->
-    </div>
-    <button onclick="window.location.href='index.html'">Logout</button>
+    <h2>Client Profile</h2>
+    <div id="profileDetails">Loading details...</div>
+    <button onclick="logout()">Logout</button>
 </div>
 
 <script>
-    // 1. Get the number from the login page
-    const userPhone = localStorage.getItem('userPhone');
-
-    // 2. Display the number
-    if (userPhone) {
-        document.getElementById('displayPhone').innerText = userPhone;
-
-        // 3. Logic to show your specific profile details
-        if (userPhone === "7016437834") {
-            document.getElementById('profileDetails').innerHTML = `
-                <p>Name: User Name</p>
-                <p>Status: Active</p>
-                <p>Other Details: Your info goes here</p>
-            `;
-        } else {
-            document.getElementById('profileDetails').innerHTML = "<p>No profile found for this number.</p>";
+    // 1. The Client Database
+    const clientDatabase = {
+        "7016437834": {
+            name: "Belim Mahammad Husen",
+            dob: "16-09-1986",
+            pancard: "BAZPN9224M",
+            bankName: "Central Bank of India",
+            accountNumber: "3664783585",
+            amount: "5,86,990/-",
+            status: "Completed 80%"
         }
+    };
+
+    // 2. Logic to fetch and display
+    const userPhone = localStorage.getItem('userPhone');
+    const displayElement = document.getElementById('profileDetails');
+
+    if (userPhone && clientDatabase[userPhone]) {
+        const data = clientDatabase[userPhone];
+        displayElement.innerHTML = `
+            <p><strong>Name:</strong> ${data.name}</p>
+            <p><strong>DOB:</strong> ${data.dob}</p>
+            <p><strong>PAN Card:</strong> ${data.pancard}</p>
+            <p><strong>Bank:</strong> ${data.bankName}</p>
+            <p><strong>Account:</strong> ${data.accountNumber}</p>
+            <p><strong>Amount:</strong> ${data.amount}</p>
+            <p><strong>Payment Status:</strong> ${data.status}</p>
+        `;
     } else {
-        // If no number is found, go back to login
+        displayElement.innerHTML = "<p>No data found for this account.</p>";
+    }
+
+    function logout() {
+        localStorage.removeItem('userPhone');
         window.location.href = "index.html";
     }
 </script>
