@@ -2,18 +2,23 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Client Profile</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client Profile | VDTA Solutions</title>
     <style>
-        body { font-family: sans-serif; background: #0b1220; color: white; padding: 20px; }
-        .card { background: #1e293b; padding: 20px; border-radius: 10px; max-width: 400px; margin: auto; }
-        .row { border-bottom: 1px solid #334155; padding: 10px 0; display: flex; justify-content: space-between; }
+        body { font-family: Arial, sans-serif; background: #0b1220; color: white; padding: 20px; }
+        .card { background: #1e293b; padding: 20px; border-radius: 12px; max-width: 500px; margin: auto; }
+        .row { border-bottom: 1px solid #334155; padding: 12px 0; display: flex; justify-content: space-between; }
+        .row b { color: #60a5fa; }
+        .back-btn { background: #64748b; color: white; padding: 10px 20px; border: none; border-radius: 8px; cursor: pointer; margin-bottom: 20px; }
     </style>
 </head>
 <body>
-    <button onclick="window.history.back()">Back</button>
+
+    <button class="back-btn" onclick="window.history.back()">Back</button>
+
     <div class="card">
         <h2>Client Details</h2>
-        <div id="details">Loading...</div>
+        <div id="details">Loading client information...</div>
     </div>
 
     <script type="module">
@@ -26,6 +31,7 @@
             projectId: "vdta-solutions7",
             appId: "1:440787032300:web:326b66d60acae019baadc9"
         };
+
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
@@ -33,30 +39,35 @@
         const phone = params.get('phone');
 
         async function loadData() {
+            if (!phone) {
+                document.getElementById("details").innerHTML = "Error: No phone number provided.";
+                return;
+            }
+
             try {
-                // CHANGE 'clients' BELOW IF YOUR COLLECTION NAME IS DIFFERENT
+                // Fetching from the 'clients' collection using the Document ID (phone number)
                 const docRef = doc(db, "clients", phone);
                 const snap = await getDoc(docRef);
 
                 if (snap.exists()) {
                     const d = snap.data();
                     document.getElementById("details").innerHTML = `
-                        <div class="row"><b>Name:</b> ${d.Name || 'N/A'}</div>
-                        <div class="row"><b>Number:</b> ${d.Number || 'N/A'}</div>
-                        <div class="row"><b>Address:</b> ${d.Address || 'N/A'}</div>
-                        <div class="row"><b>PAN:</b> ${d.Pancard || 'N/A'}</div>
-                        <div class="row"><b>DOB:</b> ${d.DOB || 'N/A'}</div>
-                        <div class="row"><b>Account:</b> ${d.AccountNo || 'N/A'}</div>
-                        <div class="row"><b>Bank:</b> ${d.BankName || 'N/A'}</div>
-                        <div class="row"><b>Pending:</b> ${d.AmountPending || 'N/A'}</div>
-                        <div class="row"><b>Status:</b> ${d.PaymentStatus || 'N/A'}</div>
+                        <div class="row"><b>Name:</b> <span>${d.Name}</span></div>
+                        <div class="row"><b>Number:</b> <span>${d.Number}</span></div>
+                        <div class="row"><b>Address:</b> <span>${d.Address}</span></div>
+                        <div class="row"><b>PAN Card:</b> <span>${d.Pancard}</span></div>
+                        <div class="row"><b>Date of Birth:</b> <span>${d.DOB}</span></div>
+                        <div class="row"><b>Account No:</b> <span>${d.AccountNo}</span></div>
+                        <div class="row"><b>Bank Name:</b> <span>${d.BankName}</span></div>
+                        <div class="row"><b>Amount Pending:</b> <span>${d.AmountPending}</span></div>
+                        <div class="row"><b>Payment Status:</b> <span>${d.PaymentStatus}</span></div>
                     `;
                 } else {
-                    document.getElementById("details").innerHTML = 
-                    "Client not found. Make sure your Collection is named 'clients' and the Document ID is '" + phone + "'.";
+                    document.getElementById("details").innerHTML = "No client found for this number.";
                 }
-            } catch (e) {
-                document.getElementById("details").innerHTML = "Error: " + e.message;
+            } catch (error) {
+                document.getElementById("details").innerHTML = "Database Error: Please check your Firebase configuration.";
+                console.error("Fetch Error:", error);
             }
         }
         loadData();
