@@ -7,14 +7,11 @@
     <title>VData Solutions | Login</title>
     <style>
         body { margin: 0; padding: 20px; font-family: 'Poppins', sans-serif; height: 100vh; display: flex; align-items: center; justify-content: center; background: radial-gradient(circle at center, #8a2be2 0%, #4b0082 100%); }
-        
-        /* Menu Styles */
         .menu-btn { position: absolute; top: 20px; left: 20px; font-size: 24px; color: white; cursor: pointer; z-index: 100; }
         .sidebar { height: 100%; width: 0; position: fixed; top: 0; left: 0; background: #222; overflow-x: hidden; transition: 0.3s; padding-top: 60px; z-index: 200; }
         .sidebar a { padding: 15px 25px; text-decoration: none; font-size: 18px; color: #ccc; display: block; transition: 0.3s; border-bottom: 1px solid #333; }
         .sidebar a:hover { color: #ff007f; }
         .close-btn { position: absolute; top: 10px; right: 25px; font-size: 36px; color: white; }
-
         .login-box { background: rgba(255, 255, 255, 0.95); padding: 40px; border-radius: 25px; box-shadow: 0 15px 40px rgba(0,0,0,0.4); text-align: center; width: 90%; max-width: 400px; }
         .icon-circle { width: 70px; height: 70px; background: #ff007f; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; color: white; font-size: 2rem; box-shadow: 0 0 20px rgba(255, 0, 127, 0.5); }
         .brand-title { font-family: 'Great Vibes', cursive; font-size: 3rem; color: #4b0082; margin: 0; }
@@ -26,7 +23,6 @@
     </style>
 </head>
 <body>
-
     <div class="menu-btn" onclick="openNav()">☰</div>
     <div id="mySidebar" class="sidebar">
         <a href="javascript:void(0)" class="close-btn" onclick="closeNav()">×</a>
@@ -35,28 +31,23 @@
         <a href="#">Data entry</a>
         <a href="#">Work from home</a>
         <a href="#">Crypto investment</a>
+        <a href="https://wa.me/919925786588" target="_blank" style="color: #00ffcc;">💬 Live Chat with Us</a>
     </div>
-
     <div class="login-box">
         <div class="icon-circle">🔒</div>
         <h1 class="brand-title">VData Solutions</h1>
         <p class="slogan">Secure Client Access Portal</p>
-
         <input type="text" id="phoneInput" placeholder="Enter Mobile Number">
         <button onclick="login()">Access My Profile</button>
-        
         <p class="footer-note">Unauthorized access is prohibited.</p>
     </div>
-
     <script>
         function openNav() { document.getElementById("mySidebar").style.width = "250px"; }
         function closeNav() { document.getElementById("mySidebar").style.width = "0"; }
         function login() {
             const phone = document.getElementById('phoneInput').value;
-            if (phone.length >= 10) {
-                localStorage.setItem('userPhone', phone);
-                window.location.href = "profile.html";
-            } else { alert("Please enter a valid mobile number."); }
+            if (phone.length >= 10) { localStorage.setItem('userPhone', phone); window.location.href = "profile.html"; } 
+            else { alert("Please enter a valid mobile number."); }
         }
     </script>
 </body>
