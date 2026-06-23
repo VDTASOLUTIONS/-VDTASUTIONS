@@ -4,92 +4,63 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-    <title>VData Solutions | Client Portal</title>
+    <title>VData Solutions | Master Dashboard</title>
     <style>
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        body { margin: 0; padding: 20px; font-family: 'Poppins', sans-serif; min-height: 100vh; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #4b0082 0%, #8a2be2 50%, #4b0082 100%); }
-        
-        .container { animation: fadeIn 0.8s ease-out; background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(15px); width: 100%; max-width: 500px; padding: 25px; border-radius: 16px; border: 1px solid rgba(255, 255, 255, 0.3); box-shadow: 0 8px 32px rgba(0,0,0,0.3); }
-        .brand-header { display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 5px; }
-        .brand-title { font-family: 'Great Vibes', cursive; font-size: 2.5rem; color: #ffffff; margin: 0; }
-        .divider { height: 2px; background: linear-gradient(90deg, transparent, #ff007f, transparent); margin: 15px 0; border: none; }
-        .slogan { text-align: center; color: #f0f0f0; font-size: 0.9rem; margin-bottom: 5px; font-style: italic; }
-        .grid { display: grid; grid-template-columns: 1fr; gap: 12px; margin-bottom: 20px; }
-        .field { background: rgba(255, 255, 255, 0.95); padding: 12px; border-radius: 10px; border-left: 5px solid #ff007f; }
-        .label { font-size: 0.7rem; color: #555; text-transform: uppercase; font-weight: bold; }
-        .value { font-size: 1rem; color: #222; font-weight: 700; display: block; }
-        button { background-color: #ff007f; color: white; border: none; width: 100%; padding: 14px; border-radius: 10px; cursor: pointer; font-weight: bold; transition: 0.3s; }
-        .footer-note { font-size: 0.75rem; color: #eee; margin-top: 20px; text-align: left; line-height: 1.6; }
-        .auth-footer { text-align: center; margin-top: 20px; font-size: 0.8rem; color: #fff; opacity: 0.8; }
+        body { margin: 0; padding: 20px; font-family: 'Poppins', sans-serif; min-height: 100vh; background: linear-gradient(135deg, #4b0082 0%, #8a2be2 50%, #4b0082 100%); }
+        .container { width: 100%; max-width: 600px; margin: auto; }
+        .brand-title { font-family: 'Great Vibes', cursive; font-size: 3rem; color: #ffffff; text-align: center; margin-bottom: 20px; }
+        .client-card { background: rgba(255, 255, 255, 0.95); padding: 20px; border-radius: 16px; margin-bottom: 20px; box-shadow: 0 8px 32px rgba(0,0,0,0.3); border-left: 8px solid #ff007f; }
+        .client-name { font-size: 1.4rem; color: #4b0082; font-weight: 700; margin-bottom: 10px; border-bottom: 1px solid #eee; padding-bottom: 5px; }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .field { margin-bottom: 5px; }
+        .label { font-size: 0.65rem; color: #888; text-transform: uppercase; font-weight: bold; }
+        .value { font-size: 0.9rem; color: #333; font-weight: 600; display: block; }
     </style>
 </head>
 <body>
-
     <div class="container">
-        <div class="brand-header">
-            <h1 class="brand-title">VData Solutions</h1>
-        </div>
-        <p class="slogan">Your Growth, Our Commitment.</p>
-        <hr class="divider">
-        
-        <div id="profileDetails">Loading...</div>
-        
-        <button onclick="logout()">Logout</button>
-
-        <div class="footer-note">
-            * Payments sometimes delay.<br>
-            * Sundays are not included in investment days.<br>
-            * New users must register with the admin.
-        </div>
-        <div class="auth-footer">🛡️ 100% Authenticated System</div>
+        <h1 class="brand-title">Client Dashboard</h1>
+        <div id="allProfiles"></div>
     </div>
     
     <script>
         const clientDatabase = {
             "9925786588": { 
-                "Full Name": "Azim Kalaniya", 
-                "Reference Name": "Sahil Shekh/Salman Saiyed", 
-                "Investment Date": "22/06/2026", 
-                "Investment Amount": "4000/-", 
-                "Net Profit": "3000/-", 
-                "Reference Benefit": "200/-", 
-                "Withdrawal Date": "25/06/2026", 
-                "UPI": "shekhimranbhai@kotakbank" 
+                "Full Name": "Azim Kalaniya", "Reference": "Sahil Shekh/Salman Saiyed", 
+                "Investment Date": "22/06/2026", "Investment Amount": "4000/-", 
+                "Net Profit": "3000/-", "Reference Benefit": "200/-", 
+                "Withdrawal Date": "25/06/2026", "UPI": "shekhimranbhai@kotakbank" 
             },
             "9574479931": { 
-                "Full Name": "Salman Saiyed", 
-                "Reference": "Imran Pathan", 
-                "Investment Date": "15/06/2026", 
-                "Investment Amount": "25000/-", 
-                "Net Profit": "24000/-", 
-                "Reference Benefits": "1000/-", 
-                "Withdrawal Date": "30/06/2026", 
-                "UPI": "9574479931@ptaxis" 
+                "Full Name": "Salman Saiyed", "Reference": "Imran Pathan", 
+                "Investment Date": "15/06/2026", "Investment Amount": "25000/-", 
+                "Net Profit": "24000/-", "Reference Benefits": "1000/-", 
+                "Withdrawal Date": "30/06/2026", "UPI": "9574479931@ptaxis" 
             },
-            "0000000000": { 
-                "Full Name": "Enter Third User Name", 
-                "Reference": "N/A", 
-                "Investment Date": "N/A", 
-                "Investment Amount": "0/-", 
-                "Net Profit": "0/-", 
-                "Reference Benefits": "0/-", 
-                "Withdrawal Date": "Pending", 
-                "UPI": "N/A" 
+            "7016437834": { 
+                "Full Name": "Belim Mahmmad Husen", "Reference": "N/A", 
+                "Investment Date": "23/06/2026", "Investment Amount": "0/-", 
+                "Net Profit": "0/-", "Reference Benefits": "0/-", 
+                "Withdrawal Date": "Pending", "UPI": "N/A" 
             }
         };
 
-        let rawPhone = localStorage.getItem('userPhone') || "";
-        let cleanPhone = rawPhone.replace(/\D/g, '').slice(-10);
-        const displayElement = document.getElementById('profileDetails');
+        const display = document.getElementById('allProfiles');
+        let html = '';
         
-        if (cleanPhone && clientDatabase[cleanPhone]) {
-            const data = clientDatabase[cleanPhone];
-            let html = '<div class="grid">';
-            for (let key in data) { html += `<div class="field"><span class="label">${key}</span><span class="value">${data[key]}</span></div>`; }
-            displayElement.innerHTML = html + '</div>';
-        } else { displayElement.innerHTML = "<p style='color:white; text-align:center;'>No profile found for this number.</p>"; }
-        
-        function logout() { localStorage.removeItem('userPhone'); window.location.href = "index.html"; }
+        for (let phone in clientDatabase) {
+            let data = clientDatabase[phone];
+            html += `<div class="client-card">
+                        <div class="client-name">${data["Full Name"]}</div>
+                        <div class="grid">`;
+            for (let key in data) {
+                if (key !== "Full Name") {
+                    html += `<div class="field"><span class="label">${key}</span><span class="value">${data[key]}</span></div>`;
+                }
+            }
+            html += `</div></div>`;
+        }
+        display.innerHTML = html;
     </script>
 </body>
 </html>
