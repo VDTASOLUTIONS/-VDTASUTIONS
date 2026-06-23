@@ -4,73 +4,60 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-    <title>VData Solutions | Client Portal</title>
+    <title>VData Solutions | Login</title>
     <style>
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        body { margin: 0; padding: 20px; font-family: 'Poppins', sans-serif; min-height: 100vh; display: flex; align-items: center; justify-content: center; background: radial-gradient(circle at center, #8a2be2 0%, #4b0082 100%); }
+        body { margin: 0; padding: 20px; font-family: 'Poppins', sans-serif; height: 100vh; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #4b0082 0%, #8a2be2 50%, #4b0082 100%); }
+        .login-box { background: rgba(255, 255, 255, 0.95); padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); text-align: center; width: 90%; max-width: 400px; }
         
-        .menu-btn { position: absolute; top: 20px; left: 20px; font-size: 24px; color: white; cursor: pointer; z-index: 100; }
-        .sidebar { height: 100%; width: 0; position: fixed; top: 0; left: 0; background: #222; overflow-x: hidden; transition: 0.3s; padding-top: 60px; z-index: 200; }
-        .sidebar a { padding: 15px 25px; text-decoration: none; font-size: 18px; color: #ccc; display: block; border-bottom: 1px solid #333; }
-        .sidebar a:hover { color: #ff007f; }
-        .close-btn { position: absolute; top: 10px; right: 25px; font-size: 36px; color: white; }
-
-        .container { animation: fadeIn 0.8s ease-out; background: rgba(255, 255, 255, 0.95); width: 100%; max-width: 450px; padding: 30px; border-radius: 25px; box-shadow: 0 15px 40px rgba(0,0,0,0.4); }
-        .brand-title { font-family: 'Great Vibes', cursive; font-size: 2.5rem; color: #4b0082; text-align: center; margin: 0 0 10px 0; }
-        .divider { height: 2px; background: linear-gradient(90deg, transparent, #ff007f, transparent); margin-bottom: 20px; border: none; }
+        /* Branding */
+        .brand-header { display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 5px; }
+        .brand-header img { width: 45px; height: 45px; }
+        .brand-title { font-family: 'Great Vibes', cursive; font-size: 2.8rem; color: #4b0082; margin: 0; }
+        .slogan { color: #555; margin-bottom: 25px; font-style: italic; font-size: 0.9rem; }
         
-        .grid { display: grid; gap: 10px; }
-        .field { background: #f9f9f9; padding: 12px; border-radius: 10px; border-left: 5px solid #ff007f; }
-        .label { font-size: 0.7rem; color: #888; text-transform: uppercase; font-weight: bold; }
-        .value { font-size: 1rem; color: #333; font-weight: 700; display: block; }
+        /* Features List */
+        .features { text-align: left; margin-bottom: 25px; font-size: 0.85rem; color: #444; border-top: 1px solid #eee; padding-top: 15px; }
+        .features li { margin-bottom: 8px; list-style: none; }
+        .features li::before { content: "✔"; color: #ff007f; margin-right: 10px; font-weight: bold; }
         
-        button { background-color: #4b0082; color: white; border: none; width: 100%; padding: 14px; border-radius: 12px; cursor: pointer; font-weight: bold; margin-top: 20px; transition: 0.3s; }
-        button:hover { background-color: #ff007f; }
+        input { width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 8px; box-sizing: border-box; }
+        button { width: 100%; padding: 12px; background: #ff007f; color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; transition: 0.3s; }
+        button:hover { background: #d6006a; }
+        
+        .footer-note { font-size: 0.7rem; color: #888; margin-top: 20px; }
     </style>
 </head>
 <body>
-    <div class="menu-btn" onclick="openNav()">☰</div>
-    <div id="mySidebar" class="sidebar">
-        <a href="javascript:void(0)" class="close-btn" onclick="closeNav()">×</a>
-        <a href="#">Register request</a><a href="#">Jobs</a><a href="#">Data entry</a><a href="#">Work from home</a><a href="#">Crypto investment</a>
-        <a href="https://wa.me/11234567890" target="_blank" style="color: #00ffcc;">💬 Live Chat with Us</a>
-    </div>
 
-    <div class="container">
+<div class="login-box">
+    <div class="brand-header">
+        <img src="logo.png" alt="Logo">
         <h1 class="brand-title">VData Solutions</h1>
-        <hr class="divider">
-        <div id="profileDetails">Loading...</div>
-        <button onclick="logout()">Logout</button>
     </div>
+    <p class="slogan">Your Growth, Our Commitment.</p>
+
+    <ul class="features">
+        <li>Real-time investment tracking</li>
+        <li>Secure and transparent profit reports</li>
+        <li>Instant access to withdrawal status</li>
+    </ul>
+
+    <input type="text" id="phoneInput" placeholder="Enter Mobile Number">
+    <button onclick="login()">Login to Profile</button>
     
-    <script>
-        function openNav() { document.getElementById("mySidebar").style.width = "250px"; }
-        function closeNav() { document.getElementById("mySidebar").style.width = "0"; }
+    <p class="footer-note">New users must register via admin.</p>
+</div>
 
-        const clientDatabase = {
-            "9925786588": { 
-                "Full Name": "Azim Kalaniya", "Reference Name": "Sahil Shekh/Salman Saiyed", 
-                "Investment Date": "22/06/2026", "Investment Amount": "4000/-", 
-                "Net Profit": "3000/-", "Reference Benefit": "200/-", 
-                "Withdrawal Date": "25/06/2026", "UPI": "shekhimranbhai@kotakbank" 
-            },
-            "9574479931": { 
-                "Full Name": "Salman Saiyed", "Reference": "Imran Pathan", 
-                "Investment Date": "15/06/2026", "Investment Amount": "25000/-", 
-                "Net Profit": "24000/-", "Reference Benefits": "1000/-", 
-                "Withdrawal Date": "30/06/2026", "UPI": "9574479931@ptaxis" 
-            }
-        };
-
-        let cleanPhone = localStorage.getItem('userPhone') || "";
-        const displayElement = document.getElementById('profileDetails');
-        if (cleanPhone && clientDatabase[cleanPhone]) {
-            const data = clientDatabase[cleanPhone];
-            let html = '<div class="grid">';
-            for (let key in data) { html += `<div class="field"><span class="label">${key}</span><span class="value">${data[key]}</span></div>`; }
-            displayElement.innerHTML = html + '</div>';
-        } else { displayElement.innerHTML = "<p style='text-align:center;'>No profile found.</p>"; }
-        function logout() { localStorage.removeItem('userPhone'); window.location.href = "index.html"; }
-    </script>
+<script>
+    function login() {
+        const phone = document.getElementById('phoneInput').value;
+        if (phone.length >= 10) {
+            localStorage.setItem('userPhone', phone);
+            window.location.href = "profile.html";
+        } else {
+            alert("Please enter a valid mobile number.");
+        }
+    }
+</script>
 </body>
 </html>
