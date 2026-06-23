@@ -5,29 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VData Solutions | Login</title>
     <style>
-        body { margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; height: 100vh; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; background-color: #f4f7f6; }
-        
-        /* The Blurry Logo Background */
-        .bg-logo { position: absolute; width: 100%; height: 100%; background-image: url('logo.png'); background-size: cover; background-position: center; filter: blur(20px); opacity: 0.15; z-index: -1; }
-        
-        .login-box { background: rgba(255, 255, 255, 0.95); padding: 40px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.15); text-align: center; width: 90%; max-width: 400px; }
-        .logo-clear { width: 120px; height: auto; margin-bottom: 10px; }
-        h1 { margin: 0; color: #333; font-size: 1.8rem; }
+        body { 
+            margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; 
+            height: 100vh; display: flex; align-items: center; justify-content: center;
+            background: linear-gradient(135deg, #4b0082 0%, #8a2be2 50%, #4b0082 100%);
+        }
+        .login-box { 
+            background: rgba(255, 255, 255, 0.95); padding: 40px; 
+            border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            text-align: center; width: 90%; max-width: 400px;
+        }
+        .logo-clear { width: 100px; height: auto; margin-bottom: 10px; }
+        h1 { margin: 0; color: #333; font-size: 1.6rem; }
         .slogan { color: #555; margin-bottom: 25px; font-style: italic; }
-        input { width: 100%; padding: 12px; margin-bottom: 20px; border: 1px solid #ccc; border-radius: 8px; box-sizing: border-box; font-size: 1rem; }
+        input { width: 100%; padding: 12px; margin-bottom: 20px; border: 1px solid #ccc; border-radius: 8px; box-sizing: border-box; }
         button { width: 100%; padding: 12px; background: #dc3545; color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; }
+        .note { font-size: 0.75rem; color: #777; margin-top: 15px; }
     </style>
 </head>
 <body>
 
-<div class="bg-logo"></div>
-
 <div class="login-box">
-    <img src="logo.png" alt="VData Solutions Logo" class="logo-clear">
+    <img src="logo.png" alt="Logo" class="logo-clear">
     <h1>VData Solutions</h1>
     <p class="slogan">Simply Smarter.</p>
     <input type="text" id="phoneInput" placeholder="Enter Mobile Number">
     <button onclick="login()">Login to Profile</button>
+    <p class="note">Note: Only existing customers can login. New customers must register via admin.</p>
 </div>
 
 <script>
@@ -37,7 +41,7 @@
             localStorage.setItem('userPhone', phone);
             window.location.href = "profile.html";
         } else {
-            alert("Please enter a valid 10-digit mobile number.");
+            alert("Please enter a valid mobile number.");
         }
     }
 </script>
