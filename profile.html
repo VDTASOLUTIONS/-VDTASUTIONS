@@ -1,3 +1,4 @@
+    <script>
         const clientDatabase = {
             "9925786588": { 
                 "Full Name": "Azim Kalaniya", "Reference Name": "Sahil Shekh/Salman Saiyed", 
@@ -22,3 +23,27 @@
                 "UPI": "N/A" 
             }
         };
+
+        // This line ensures it ONLY gets the current user's phone
+        let rawPhone = localStorage.getItem('userPhone') || "";
+        let cleanPhone = rawPhone.replace(/\D/g, '').slice(-10);
+        const displayElement = document.getElementById('profileDetails');
+
+        // This checks if the user is in the database and shows ONLY their details
+        if (cleanPhone && clientDatabase[cleanPhone]) {
+            const data = clientDatabase[cleanPhone];
+            let html = '<div class="grid">';
+            for (let key in data) { 
+                html += `<div class="field"><span class="label">${key}</span><span class="value">${data[key]}</span></div>`; 
+            }
+            displayElement.innerHTML = html + '</div>';
+        } else { 
+            // If they aren't logged in correctly, show this
+            displayElement.innerHTML = "<p style='color:white; text-align:center;'>Please log in to view your profile.</p>"; 
+        }
+
+        function logout() { 
+            localStorage.removeItem('userPhone'); 
+            window.location.href = "index.html"; 
+        }
+    </script>
