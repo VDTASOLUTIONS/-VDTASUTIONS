@@ -3,95 +3,72 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <title>VData Solutions | Client Portal</title>
     <style>
-        body { 
-            margin: 0; padding: 20px; font-family: 'Segoe UI', sans-serif; 
-            min-height: 100vh; display: flex; align-items: center; justify-content: center;
-            /* Vibrant Purple Background */
-            background: linear-gradient(135deg, #4b0082 0%, #8a2be2 50%, #4b0082 100%);
-        }
-        .container { 
-            background: rgba(255, 255, 255, 0.15); 
-            backdrop-filter: blur(15px);
-            width: 100%; max-width: 500px; padding: 25px; 
-            border-radius: 16px; border: 1px solid rgba(255, 255, 255, 0.3);
-            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
-        }
-        .brand { text-align: center; margin-bottom: 20px; border-bottom: 2px solid rgba(255,255,255,0.2); padding-bottom: 10px; }
-        .brand h1 { margin: 0; color: #ffffff; font-size: 1.6rem; }
+        body { margin: 0; padding: 20px; font-family: 'Poppins', sans-serif; min-height: 100vh; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #4b0082 0%, #8a2be2 50%, #4b0082 100%); }
+        .container { background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(15px); width: 100%; max-width: 500px; padding: 25px; border-radius: 16px; border: 1px solid rgba(255, 255, 255, 0.3); box-shadow: 0 8px 32px rgba(0,0,0,0.3); }
         
-        .secure-badge { background: #00ffcc; color: #004d3d; padding: 10px; text-align: center; border-radius: 8px; font-weight: bold; margin-bottom: 20px; }
+        /* Brand & Logo Section */
+        .brand-header { display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 5px; }
+        .brand-header img { width: 40px; height: 40px; }
+        .brand-title { font-family: 'Great Vibes', cursive; font-size: 2.5rem; color: #ffffff; margin: 0; }
+        .slogan { text-align: center; color: #f0f0f0; font-size: 0.9rem; margin-bottom: 15px; font-style: italic; }
         
+        /* Smaller Secure Badge */
+        .secure-badge { background: #00ffcc; color: #004d3d; padding: 5px 15px; text-align: center; border-radius: 20px; font-weight: bold; font-size: 0.75rem; margin: 0 auto 20px auto; display: inline-block; }
+        .badge-wrapper { text-align: center; }
+
         .grid { display: grid; grid-template-columns: 1fr; gap: 12px; }
-        
-        /* Vibrant Interior Fields */
-        .field { 
-            background: rgba(255, 255, 255, 0.95); 
-            padding: 12px; border-radius: 10px; 
-            border-left: 5px solid #ff007f; /* Adds a vibrant accent color to the fields */
-        }
+        .field { background: rgba(255, 255, 255, 0.95); padding: 12px; border-radius: 10px; border-left: 5px solid #ff007f; }
         .label { font-size: 0.7rem; color: #555; text-transform: uppercase; font-weight: bold; }
         .value { font-size: 1rem; color: #222; font-weight: 700; display: block; }
-        
         button { background-color: #ff007f; color: white; border: none; width: 100%; padding: 14px; border-radius: 10px; cursor: pointer; font-weight: bold; margin-top: 15px; }
-        .footer-note { font-size: 0.75rem; color: #ddd; margin-top: 15px; text-align: center; }
+        .footer-note { font-size: 0.75rem; color: #eee; margin-top: 15px; text-align: center; }
     </style>
 </head>
 <body>
-
-<div class="container">
-    <div class="brand"><h1>VData Solutions</h1></div>
-    <div class="secure-badge">✔ 100% Authentic & Secure</div>
-    <div id="profileDetails">Loading...</div>
-    <div class="footer-note">* Note: Payments may be delayed. Sundays are not counted as active investment days.</div>
-    <button onclick="logout()">Logout</button>
-</div>
-
-<script>
-    const clientDatabase = {
-        "9925786588": {
-            "Full Name": "Azim Kalaniya",
-            "Reference Name": "Sahil Shekh/Salman Saiyed",
-            "Investment Date": "22/06/2026",
-            "Investment Amount": "4000/-",
-            "Net Profit": "3000/-",
-            "Reference Benefit": "200/-",
-            "Withdrawal Date": "25/06/2026",
-            "UPI": "shekhimranbhai@kotakbank"
-        },
-        "9574479931": {
-            "Full Name": "Salman Saiyed",
-            "Reference": "Imran Pathan",
-            "Investment Date": "15/06/2026",
-            "Investment Amount": "25000/-",
-            "Net Profit": "24000/-",
-            "Reference Benefits": "1000/-",
-            "Withdrawal Date": "30/06/2026",
-            "UPI": "9574479931@ptaxis"
-        }
-    };
-
-    let rawPhone = localStorage.getItem('userPhone') || "";
-    let cleanPhone = rawPhone.replace(/\D/g, '').slice(-10);
-    const displayElement = document.getElementById('profileDetails');
-
-    if (cleanPhone && clientDatabase[cleanPhone]) {
-        const data = clientDatabase[cleanPhone];
-        let html = '<div class="grid">';
-        for (let key in data) {
-            html += `<div class="field"><span class="label">${key}</span><span class="value">${data[key]}</span></div>`;
-        }
-        html += '</div>';
-        displayElement.innerHTML = html;
-    } else {
-        displayElement.innerHTML = "<p>No profile found.</p>";
-    }
-
-    function logout() {
-        localStorage.removeItem('userPhone');
-        window.location.href = "index.html";
-    }
-</script>
+    <div class="container">
+        <div class="brand-header">
+            <img src="logo.png" alt="Logo">
+            <h1 class="brand-title">VData Solutions</h1>
+        </div>
+        <p class="slogan">Your Growth, Our Commitment.</p>
+        
+        <div class="badge-wrapper">
+            <div class="secure-badge">✔ 100% Authentic & Secure</div>
+        </div>
+        
+        <div id="profileDetails">Loading...</div>
+        <div class="footer-note">* Note: Payments may be delayed.</div>
+        <button onclick="logout()">Logout</button>
+    </div>
+    
+    <script>
+        const clientDatabase = {
+            "9925786588": {
+                "Full Name": "Azim Kalaniya",
+                "Reference Name": "Sahil Shekh/Salman Saiyed",
+                "Investment Date": "22/06/2026",
+                "Investment Amount": "4000/-",
+                "Net Profit": "3000/-",
+                "Reference Benefit": "200/-",
+                "Withdrawal Date": "25/06/2026",
+                "UPI": "shekhimranbhai@kotakbank"
+            }
+        };
+        let rawPhone = localStorage.getItem('userPhone') || "";
+        let cleanPhone = rawPhone.replace(/\D/g, '').slice(-10);
+        const displayElement = document.getElementById('profileDetails');
+        if (cleanPhone && clientDatabase[cleanPhone]) {
+            const data = clientDatabase[cleanPhone];
+            let html = '<div class="grid">';
+            for (let key in data) {
+                html += `<div class="field"><span class="label">${key}</span><span class="value">${data[key]}</span></div>`;
+            }
+            displayElement.innerHTML = html + '</div>';
+        } else { displayElement.innerHTML = "<p>No profile found.</p>"; }
+        function logout() { localStorage.removeItem('userPhone'); window.location.href = "index.html"; }
+    </script>
 </body>
 </html>
