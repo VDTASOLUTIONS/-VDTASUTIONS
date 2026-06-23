@@ -9,13 +9,6 @@
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         body { margin: 0; padding: 20px; font-family: 'Poppins', sans-serif; min-height: 100vh; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #4b0082 0%, #8a2be2 50%, #4b0082 100%); }
         
-        /* Menu Styles */
-        .menu-btn { position: absolute; top: 20px; left: 20px; font-size: 24px; color: white; cursor: pointer; z-index: 100; }
-        .sidebar { height: 100%; width: 0; position: fixed; top: 0; left: 0; background: #222; overflow-x: hidden; transition: 0.3s; padding-top: 60px; z-index: 200; }
-        .sidebar a { padding: 15px 25px; text-decoration: none; font-size: 18px; color: #ccc; display: block; transition: 0.3s; border-bottom: 1px solid #333; }
-        .sidebar a:hover { color: #ff007f; }
-        .close-btn { position: absolute; top: 10px; right: 25px; font-size: 36px; color: white; }
-
         .container { animation: fadeIn 0.8s ease-out; background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(15px); width: 100%; max-width: 500px; padding: 25px; border-radius: 16px; border: 1px solid rgba(255, 255, 255, 0.3); box-shadow: 0 8px 32px rgba(0,0,0,0.3); }
         .brand-header { display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 5px; }
         .brand-title { font-family: 'Great Vibes', cursive; font-size: 2.5rem; color: #ffffff; margin: 0; }
@@ -31,17 +24,6 @@
     </style>
 </head>
 <body>
-
-    <!-- Menu Section -->
-    <div class="menu-btn" onclick="openNav()">☰</div>
-    <div id="mySidebar" class="sidebar">
-        <a href="javascript:void(0)" class="close-btn" onclick="closeNav()">×</a>
-        <a href="#">Register request</a>
-        <a href="#">Jobs</a>
-        <a href="#">Data entry</a>
-        <a href="#">Work from home</a>
-        <a href="#">Crypto investment</a>
-    </div>
 
     <div class="container">
         <div class="brand-header">
@@ -63,22 +45,50 @@
     </div>
     
     <script>
-        function openNav() { document.getElementById("mySidebar").style.width = "250px"; }
-        function closeNav() { document.getElementById("mySidebar").style.width = "0"; }
-
         const clientDatabase = {
-            "9925786588": { "Full Name": "Azim Kalaniya", "Investment Amount": "4000/-", "Net Profit": "3000/-", "UPI": "shekhimranbhai@kotakbank" },
-            "9574479931": { "Full Name": "Salman Saiyed", "Investment Amount": "25000/-", "Net Profit": "24000/-", "UPI": "9574479931@ptaxis" }
+            "9925786588": { 
+                "Full Name": "Azim Kalaniya", 
+                "Reference Name": "Sahil Shekh/Salman Saiyed", 
+                "Investment Date": "22/06/2026", 
+                "Investment Amount": "4000/-", 
+                "Net Profit": "3000/-", 
+                "Reference Benefit": "200/-", 
+                "Withdrawal Date": "25/06/2026", 
+                "UPI": "shekhimranbhai@kotakbank" 
+            },
+            "9574479931": { 
+                "Full Name": "Salman Saiyed", 
+                "Reference": "Imran Pathan", 
+                "Investment Date": "15/06/2026", 
+                "Investment Amount": "25000/-", 
+                "Net Profit": "24000/-", 
+                "Reference Benefits": "1000/-", 
+                "Withdrawal Date": "30/06/2026", 
+                "UPI": "9574479931@ptaxis" 
+            },
+            "0000000000": { 
+                "Full Name": "Enter Third User Name", 
+                "Reference": "N/A", 
+                "Investment Date": "N/A", 
+                "Investment Amount": "0/-", 
+                "Net Profit": "0/-", 
+                "Reference Benefits": "0/-", 
+                "Withdrawal Date": "Pending", 
+                "UPI": "N/A" 
+            }
         };
+
         let rawPhone = localStorage.getItem('userPhone') || "";
         let cleanPhone = rawPhone.replace(/\D/g, '').slice(-10);
         const displayElement = document.getElementById('profileDetails');
+        
         if (cleanPhone && clientDatabase[cleanPhone]) {
             const data = clientDatabase[cleanPhone];
             let html = '<div class="grid">';
             for (let key in data) { html += `<div class="field"><span class="label">${key}</span><span class="value">${data[key]}</span></div>`; }
             displayElement.innerHTML = html + '</div>';
-        } else { displayElement.innerHTML = "<p>No profile found.</p>"; }
+        } else { displayElement.innerHTML = "<p style='color:white; text-align:center;'>No profile found for this number.</p>"; }
+        
         function logout() { localStorage.removeItem('userPhone'); window.location.href = "index.html"; }
     </script>
 </body>
