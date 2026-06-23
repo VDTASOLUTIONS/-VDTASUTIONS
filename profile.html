@@ -3,32 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Client Profile</title>
+    <title>VData Solutions | Client Portal</title>
     <style>
         body { font-family: 'Segoe UI', sans-serif; background-color: #f4f7f6; padding: 20px; display: flex; justify-content: center; }
-        .form-container { background: white; width: 100%; max-width: 500px; padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
-        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 2px solid #eee; padding-bottom: 10px; }
-        h2 { margin: 0; color: #333; }
-        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px; }
-        .field { border: 1px solid #ddd; padding: 12px; border-radius: 6px; background-color: #fafafa; }
-        .label { font-size: 0.75rem; color: #666; text-transform: uppercase; font-weight: bold; display: block; margin-bottom: 4px; }
-        .value { font-size: 1rem; color: #222; font-weight: 500; }
-        .full-width { grid-column: span 2; }
-        button { background-color: #dc3545; color: white; border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-weight: bold; }
+        .container { background: white; width: 100%; max-width: 500px; padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        
+        /* Company Branding */
+        .brand { text-align: center; margin-bottom: 20px; border-bottom: 2px solid #dc3545; padding-bottom: 10px; }
+        .brand h1 { margin: 0; color: #dc3545; font-size: 1.5rem; }
+        .brand p { margin: 0; font-size: 0.9rem; color: #555; }
+
+        /* Security Badge */
+        .secure-badge { background: #d1e7dd; color: #0f5132; padding: 8px; text-align: center; border-radius: 6px; font-weight: bold; margin-bottom: 20px; font-size: 0.85rem; }
+        
+        /* Data Grid */
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; }
+        .field { border: 1px solid #ddd; padding: 10px; border-radius: 6px; background: #fafafa; }
+        .label { font-size: 0.7rem; color: #777; text-transform: uppercase; font-weight: bold; display: block; }
+        .value { font-size: 0.95rem; color: #333; font-weight: 600; }
+        .full { grid-column: span 2; }
+
+        /* Footer Notes */
+        .footer-note { font-size: 0.75rem; color: #888; margin-top: 15px; line-height: 1.4; border-top: 1px solid #eee; padding-top: 10px; }
+        button { background-color: #dc3545; color: white; border: none; width: 100%; padding: 12px; border-radius: 6px; cursor: pointer; font-weight: bold; margin-top: 10px; }
     </style>
 </head>
 <body>
 
-<div class="form-container">
-    <div class="header">
-        <h2>Client Profile</h2>
-        <button onclick="logout()">Logout</button>
+<div class="container">
+    <div class="brand">
+        <h1>VData Solutions</h1>
+        <p>Client Investment Portal</p>
     </div>
+
+    <div class="secure-badge">✔ 100% Authentic & Secure</div>
+
     <div id="profileDetails">Loading...</div>
+
+    <div class="footer-note">
+        * Note: Payments may be subject to minor delays. Please note that Sundays are not counted as active investment days.
+    </div>
+
+    <button onclick="logout()">Logout</button>
 </div>
 
 <script>
-    // THE MASTER DATABASE (Now with 3 profiles)
     const clientDatabase = {
         "7016437834": {
             "Full Name": "Belim Mahammad Husen",
@@ -37,11 +56,11 @@
             "Bank": "Central Bank of India",
             "Account": "3664783585",
             "Amount": "5,86,990/-",
-            "Payment Status": "Completed 80%"
+            "Status": "Completed 80%"
         },
         "9925786588": {
             "Full Name": "Azim Kalaniya",
-            "Reference Name": "Sahil Shekh/Salman Saiyed",
+            "Reference": "Sahil Shekh/Salman Saiyed",
             "Investment Date": "22/06/2026",
             "Investment Amount": "4000/-",
             "Net Profit": "30000/-",
@@ -61,26 +80,23 @@
         }
     };
 
-    // LOGIC
     let rawPhone = localStorage.getItem('userPhone') || "";
     let cleanPhone = rawPhone.replace(/\D/g, '').slice(-10);
     const displayElement = document.getElementById('profileDetails');
 
     if (cleanPhone && clientDatabase[cleanPhone]) {
         const data = clientDatabase[cleanPhone];
-        let html = '<div class="form-row">';
-        
+        let html = '<div class="grid">';
         for (let key in data) {
-            html += `
-                <div class="field ${key === 'Full Name' ? 'full-width' : ''}">
-                    <span class="label">${key}</span>
-                    <span class="value">${data[key]}</span>
-                </div>`;
+            html += `<div class="field ${key === 'Full Name' ? 'full' : ''}">
+                        <span class="label">${key}</span>
+                        <span class="value">${data[key]}</span>
+                     </div>`;
         }
         html += '</div>';
         displayElement.innerHTML = html;
     } else {
-        displayElement.innerHTML = "<p>No profile found. Please login again.</p>";
+        displayElement.innerHTML = "<p>No profile found.</p>";
     }
 
     function logout() {
@@ -88,6 +104,5 @@
         window.location.href = "index.html";
     }
 </script>
-
 </body>
 </html>
