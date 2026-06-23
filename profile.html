@@ -2,19 +2,24 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Client Profile</title>
     <style>
-        body { font-family: sans-serif; background: #f8fafc; padding: 20px; }
-        .card { background: white; padding: 20px; border-radius: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); max-width: 500px; margin: auto; }
-        .table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-        .table td { border: 1px solid #ddd; padding: 10px; }
-        .header { display: flex; justify-content: space-between; align-items: center; }
-        button { padding: 8px 15px; background: #ef4444; color: white; border: none; border-radius: 5px; cursor: pointer; }
+        body { font-family: 'Segoe UI', sans-serif; background-color: #f4f7f6; padding: 20px; display: flex; justify-content: center; }
+        .form-container { background: white; width: 100%; max-width: 500px; padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 2px solid #eee; padding-bottom: 10px; }
+        h2 { margin: 0; color: #333; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px; }
+        .field { border: 1px solid #ddd; padding: 12px; border-radius: 6px; background-color: #fafafa; }
+        .label { font-size: 0.75rem; color: #666; text-transform: uppercase; font-weight: bold; display: block; margin-bottom: 4px; }
+        .value { font-size: 1rem; color: #222; font-weight: 500; }
+        .full-width { grid-column: span 2; }
+        button { background-color: #dc3545; color: white; border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-weight: bold; }
     </style>
 </head>
 <body>
 
-<div class="card">
+<div class="form-container">
     <div class="header">
         <h2>Client Profile</h2>
         <button onclick="logout()">Logout</button>
@@ -45,23 +50,26 @@
         }
     };
 
-    // THIS IS THE FIX: It cleans the phone number by removing spaces and +91
     let rawPhone = localStorage.getItem('userPhone') || "";
-    let cleanPhone = rawPhone.replace(/\D/g, ''); 
-    if (cleanPhone.startsWith('91')) cleanPhone = cleanPhone.substring(2);
+    let cleanPhone = rawPhone.replace(/\D/g, '').slice(-10);
 
     const displayElement = document.getElementById('profileDetails');
 
     if (cleanPhone && clientDatabase[cleanPhone]) {
         const data = clientDatabase[cleanPhone];
-        let tableHTML = '<table class="table">';
+        let html = '<div class="form-row">';
+        
         for (let key in data) {
-            tableHTML += `<tr><td><strong>${key}</strong></td><td>${data[key]}</td></tr>`;
+            html += `
+                <div class="field ${key === 'Full Name' ? 'full-width' : ''}">
+                    <span class="label">${key}</span>
+                    <span class="value">${data[key]}</span>
+                </div>`;
         }
-        tableHTML += '</table>';
-        displayElement.innerHTML = tableHTML;
+        html += '</div>';
+        displayElement.innerHTML = html;
     } else {
-        displayElement.innerHTML = `<p>No data found for phone number: <b>${rawPhone}</b></p>`;
+        displayElement.innerHTML = "<p>No profile found. Please login again.</p>";
     }
 
     function logout() {
@@ -69,5 +77,6 @@
         window.location.href = "index.html";
     }
 </script>
+
 </body>
 </html>
