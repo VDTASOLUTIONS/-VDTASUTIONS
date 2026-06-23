@@ -28,6 +28,7 @@
 </div>
 
 <script>
+    // THE MASTER DATABASE
     const clientDatabase = {
         "7016437834": {
             "Full Name": "Belim Mahammad Husen",
@@ -44,15 +45,15 @@
             "Investment Date": "22/06/2026",
             "Investment Amount": "4000/-",
             "Net Profit": "30000/-",
-            "Reference Benefit": "2000/-",
+            "Reference Benefit": "200/-",
             "Withdrawal Date": "25/06/2026",
             "UPI": "shekhimranbhai@kotakbank"
         }
     };
 
+    // LOGIC
     let rawPhone = localStorage.getItem('userPhone') || "";
     let cleanPhone = rawPhone.replace(/\D/g, '').slice(-10);
-
     const displayElement = document.getElementById('profileDetails');
 
     if (cleanPhone && clientDatabase[cleanPhone]) {
