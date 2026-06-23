@@ -1,32 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-    <title>VData Solutions | Master Dashboard</title>
-    <style>
-        body { margin: 0; padding: 20px; font-family: 'Poppins', sans-serif; min-height: 100vh; background: linear-gradient(135deg, #4b0082 0%, #8a2be2 50%, #4b0082 100%); }
-        .container { width: 100%; max-width: 600px; margin: auto; }
-        .brand-title { font-family: 'Great Vibes', cursive; font-size: 3rem; color: #ffffff; text-align: center; margin-bottom: 20px; }
-        .client-card { background: rgba(255, 255, 255, 0.95); padding: 20px; border-radius: 16px; margin-bottom: 20px; box-shadow: 0 8px 32px rgba(0,0,0,0.3); border-left: 8px solid #ff007f; }
-        .client-name { font-size: 1.4rem; color: #4b0082; font-weight: 700; margin-bottom: 10px; border-bottom: 1px solid #eee; padding-bottom: 5px; }
-        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-        .field { margin-bottom: 5px; }
-        .label { font-size: 0.65rem; color: #888; text-transform: uppercase; font-weight: bold; }
-        .value { font-size: 0.9rem; color: #333; font-weight: 600; display: block; }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <h1 class="brand-title">Client Dashboard</h1>
-        <div id="allProfiles"></div>
-    </div>
-    
-    <script>
         const clientDatabase = {
             "9925786588": { 
-                "Full Name": "Azim Kalaniya", "Reference": "Sahil Shekh/Salman Saiyed", 
+                "Full Name": "Azim Kalaniya", "Reference Name": "Sahil Shekh/Salman Saiyed", 
                 "Investment Date": "22/06/2026", "Investment Amount": "4000/-", 
                 "Net Profit": "3000/-", "Reference Benefit": "200/-", 
                 "Withdrawal Date": "25/06/2026", "UPI": "shekhimranbhai@kotakbank" 
@@ -38,29 +12,13 @@
                 "Withdrawal Date": "30/06/2026", "UPI": "9574479931@ptaxis" 
             },
             "7016437834": { 
-                "Full Name": "Belim Mahmmad Husen", "Reference": "N/A", 
-                "Investment Date": "23/06/2026", "Investment Amount": "0/-", 
-                "Net Profit": "0/-", "Reference Benefits": "0/-", 
-                "Withdrawal Date": "Pending", "UPI": "N/A" 
+                "Full Name": "Belim Mahmmad Husen", 
+                "Reference Name": "Salman Saiyed", 
+                "Investment Date": "23/06/2026", 
+                "Investment Amount": "5,86,990/-", 
+                "Net Profit": "Lum-Sum", 
+                "Reference Benefits": "80%", 
+                "Withdrawal Date": "Under Process", 
+                "UPI": "N/A" 
             }
         };
-
-        const display = document.getElementById('allProfiles');
-        let html = '';
-        
-        for (let phone in clientDatabase) {
-            let data = clientDatabase[phone];
-            html += `<div class="client-card">
-                        <div class="client-name">${data["Full Name"]}</div>
-                        <div class="grid">`;
-            for (let key in data) {
-                if (key !== "Full Name") {
-                    html += `<div class="field"><span class="label">${key}</span><span class="value">${data[key]}</span></div>`;
-                }
-            }
-            html += `</div></div>`;
-        }
-        display.innerHTML = html;
-    </script>
-</body>
-</html>
