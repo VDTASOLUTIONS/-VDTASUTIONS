@@ -3,47 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <title>VData Solutions | Login</title>
     <style>
-        body { 
-            margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; 
-            height: 100vh; display: flex; align-items: center; justify-content: center;
-            background: linear-gradient(135deg, #4b0082 0%, #8a2be2 50%, #4b0082 100%);
-        }
-        .login-box { 
-            background: rgba(255, 255, 255, 0.95); padding: 40px; 
-            border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            text-align: center; width: 90%; max-width: 400px;
-        }
-        .logo-clear { width: 100px; height: auto; margin-bottom: 10px; }
-        h1 { margin: 0; color: #333; font-size: 1.6rem; }
+        body { margin: 0; padding: 0; font-family: 'Poppins', sans-serif; height: 100vh; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #4b0082 0%, #8a2be2 50%, #4b0082 100%); }
+        .login-box { background: rgba(255, 255, 255, 0.95); padding: 40px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); text-align: center; width: 90%; max-width: 400px; }
+        .brand-title { font-family: 'Great Vibes', cursive; font-size: 3rem; color: #4b0082; margin: 0; }
         .slogan { color: #555; margin-bottom: 25px; font-style: italic; }
         input { width: 100%; padding: 12px; margin-bottom: 20px; border: 1px solid #ccc; border-radius: 8px; box-sizing: border-box; }
-        button { width: 100%; padding: 12px; background: #dc3545; color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; }
-        .note { font-size: 0.75rem; color: #777; margin-top: 15px; }
+        button { width: 100%; padding: 12px; background: #ff007f; color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; }
     </style>
 </head>
 <body>
-
-<div class="login-box">
-    <img src="logo.png" alt="Logo" class="logo-clear">
-    <h1>VData Solutions</h1>
-    <p class="slogan">Simply Smarter.</p>
-    <input type="text" id="phoneInput" placeholder="Enter Mobile Number">
-    <button onclick="login()">Login to Profile</button>
-    <p class="note">Note: Only existing customers can login. New customers must register via admin.</p>
-</div>
-
-<script>
-    function login() {
-        const phone = document.getElementById('phoneInput').value;
-        if (phone.length >= 10) {
-            localStorage.setItem('userPhone', phone);
-            window.location.href = "profile.html";
-        } else {
-            alert("Please enter a valid mobile number.");
+    <div class="login-box">
+        <h1 class="brand-title">VData Solutions</h1>
+        <p class="slogan">Simply Smarter.</p>
+        <input type="text" id="phoneInput" placeholder="Enter Mobile Number">
+        <button onclick="login()">Login to Profile</button>
+    </div>
+    <script>
+        function login() {
+            const phone = document.getElementById('phoneInput').value;
+            if (phone.length >= 10) {
+                localStorage.setItem('userPhone', phone);
+                window.location.href = "profile.html";
+            } else { alert("Please enter a valid mobile number."); }
         }
-    }
-</script>
+    </script>
 </body>
 </html>
