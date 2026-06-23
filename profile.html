@@ -4,60 +4,85 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-    <title>VData Solutions | Login</title>
+    <title>VData Solutions | Client Portal</title>
     <style>
-        body { margin: 0; padding: 20px; font-family: 'Poppins', sans-serif; height: 100vh; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #4b0082 0%, #8a2be2 50%, #4b0082 100%); }
-        .login-box { background: rgba(255, 255, 255, 0.95); padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); text-align: center; width: 90%; max-width: 400px; }
+        body { margin: 0; padding: 20px; font-family: 'Poppins', sans-serif; min-height: 100vh; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #4b0082 0%, #8a2be2 50%, #4b0082 100%); }
+        .container { background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(15px); width: 100%; max-width: 500px; padding: 25px; border-radius: 16px; border: 1px solid rgba(255, 255, 255, 0.3); box-shadow: 0 8px 32px rgba(0,0,0,0.3); }
         
-        /* Branding */
         .brand-header { display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 5px; }
-        .brand-header img { width: 45px; height: 45px; }
-        .brand-title { font-family: 'Great Vibes', cursive; font-size: 2.8rem; color: #4b0082; margin: 0; }
-        .slogan { color: #555; margin-bottom: 25px; font-style: italic; font-size: 0.9rem; }
+        .brand-header img { width: 40px; height: 40px; }
+        .brand-title { font-family: 'Great Vibes', cursive; font-size: 2.5rem; color: #ffffff; margin: 0; }
+        .slogan { text-align: center; color: #f0f0f0; font-size: 0.9rem; margin-bottom: 25px; font-style: italic; }
         
-        /* Features List */
-        .features { text-align: left; margin-bottom: 25px; font-size: 0.85rem; color: #444; border-top: 1px solid #eee; padding-top: 15px; }
-        .features li { margin-bottom: 8px; list-style: none; }
-        .features li::before { content: "✔"; color: #ff007f; margin-right: 10px; font-weight: bold; }
+        .grid { display: grid; grid-template-columns: 1fr; gap: 12px; margin-bottom: 20px; }
+        .field { background: rgba(255, 255, 255, 0.95); padding: 12px; border-radius: 10px; border-left: 5px solid #ff007f; }
+        .label { font-size: 0.7rem; color: #555; text-transform: uppercase; font-weight: bold; }
+        .value { font-size: 1rem; color: #222; font-weight: 700; display: block; }
         
-        input { width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 8px; box-sizing: border-box; }
-        button { width: 100%; padding: 12px; background: #ff007f; color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; transition: 0.3s; }
-        button:hover { background: #d6006a; }
+        button { background-color: #ff007f; color: white; border: none; width: 100%; padding: 14px; border-radius: 10px; cursor: pointer; font-weight: bold; }
         
-        .footer-note { font-size: 0.7rem; color: #888; margin-top: 20px; }
+        .footer-note { font-size: 0.75rem; color: #eee; margin-top: 20px; text-align: left; line-height: 1.6; }
+        .auth-footer { text-align: center; margin-top: 20px; font-size: 0.8rem; color: #fff; opacity: 0.8; }
     </style>
 </head>
 <body>
+    <div class="container">
+        <div class="brand-header">
+            <img src="logo.png" alt="Logo">
+            <h1 class="brand-title">VData Solutions</h1>
+        </div>
+        <p class="slogan">Your Growth, Our Commitment.</p>
+        
+        <div id="profileDetails">Loading...</div>
+        
+        <button onclick="logout()">Logout</button>
 
-<div class="login-box">
-    <div class="brand-header">
-        <img src="logo.png" alt="Logo">
-        <h1 class="brand-title">VData Solutions</h1>
+        <div class="footer-note">
+            * Payments sometimes delay.<br>
+            * Sundays are not included in investment days.<br>
+            * New users must register with the admin.
+        </div>
+
+        <div class="auth-footer">
+            🛡️ 100% Authenticated System
+        </div>
     </div>
-    <p class="slogan">Your Growth, Our Commitment.</p>
-
-    <ul class="features">
-        <li>Real-time investment tracking</li>
-        <li>Secure and transparent profit reports</li>
-        <li>Instant access to withdrawal status</li>
-    </ul>
-
-    <input type="text" id="phoneInput" placeholder="Enter Mobile Number">
-    <button onclick="login()">Login to Profile</button>
     
-    <p class="footer-note">New users must register via admin.</p>
-</div>
-
-<script>
-    function login() {
-        const phone = document.getElementById('phoneInput').value;
-        if (phone.length >= 10) {
-            localStorage.setItem('userPhone', phone);
-            window.location.href = "profile.html";
-        } else {
-            alert("Please enter a valid mobile number.");
-        }
-    }
-</script>
+    <script>
+        const clientDatabase = {
+            "9925786588": {
+                "Full Name": "Azim Kalaniya",
+                "Reference Name": "Sahil Shekh/Salman Saiyed",
+                "Investment Date": "22/06/2026",
+                "Investment Amount": "4000/-",
+                "Net Profit": "3000/-",
+                "Reference Benefit": "200/-",
+                "Withdrawal Date": "25/06/2026",
+                "UPI": "shekhimranbhai@kotakbank"
+            },
+            "9574479931": {
+                "Full Name": "Salman Saiyed",
+                "Reference": "Imran Pathan",
+                "Investment Date": "15/06/2026",
+                "Investment Amount": "25000/-",
+                "Net Profit": "24000/-",
+                "Reference Benefits": "1000/-",
+                "Withdrawal Date": "30/06/2026",
+                "UPI": "9574479931@ptaxis"
+            }
+        };
+        let rawPhone = localStorage.getItem('userPhone') || "";
+        let cleanPhone = rawPhone.replace(/\D/g, '').slice(-10);
+        const displayElement = document.getElementById('profileDetails');
+        if (cleanPhone && clientDatabase[cleanPhone]) {
+            const data = clientDatabase[cleanPhone];
+            let html = '<div class="grid">';
+            for (let key in data) {
+                html += `<div class="field"><span class="label">${key}</span><span class="value">${data[key]}</span></div>`;
+            }
+            displayElement.innerHTML = html + '</div>';
+        } else { displayElement.innerHTML = "<p>No profile found.</p>"; }
+        function logout() { localStorage.removeItem('userPhone'); window.location.href = "index.html"; }
+    </script>
 </body>
 </html>
