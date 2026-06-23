@@ -45,9 +45,9 @@
         function openNav() { document.getElementById("mySidebar").style.width = "250px"; }
         function closeNav() { document.getElementById("mySidebar").style.width = "0"; }
         function login() {
-            const phone = document.getElementById('phoneInput').value;
+            const phone = document.getElementById('phoneInput').value.replace(/\D/g, '');
             if (phone.length >= 10) { localStorage.setItem('userPhone', phone); window.location.href = "profile.html"; } 
-            else { alert("Please enter a valid mobile number."); }
+            else { alert("Please enter a valid 10-digit mobile number."); }
         }
     </script>
 </body>
