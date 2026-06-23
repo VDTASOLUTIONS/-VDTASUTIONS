@@ -3,35 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VDTA Solutions | Official Portal</title>
+    <title>VData Solutions | Login</title>
     <style>
-        body { font-family: sans-serif; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; background: #f8fafc; margin: 0; }
-        .card { background: white; padding: 30px; border-radius: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); width: 300px; text-align: center; }
-        input { width: 100%; padding: 12px; margin: 15px 0; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; }
-        button { width: 100%; padding: 12px; background: #0f172a; color: white; border: none; border-radius: 8px; cursor: pointer; }
+        body { 
+            margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; 
+            height: 100vh; display: flex; align-items: center; justify-content: center;
+            position: relative; overflow: hidden;
+        }
+        /* Background Logo Styling */
+        .bg-logo {
+            position: absolute; width: 600px; height: 600px;
+            background-image: url('logo.png'); /* Ensure this matches your file name */
+            background-size: contain; background-repeat: no-repeat;
+            filter: blur(15px); opacity: 0.3; z-index: -1;
+        }
+        .login-box {
+            background: rgba(255, 255, 255, 0.9); padding: 40px; 
+            border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            text-align: center; width: 90%; max-width: 400px;
+        }
+        h1 { margin: 0; color: #333; font-size: 2rem; }
+        .slogan { color: #555; margin-bottom: 30px; font-style: italic; }
+        input { 
+            width: 100%; padding: 12px; margin-bottom: 20px; border: 1px solid #ccc; 
+            border-radius: 8px; box-sizing: border-box; font-size: 1rem;
+        }
+        button { 
+            width: 100%; padding: 12px; background: #dc3545; color: white; 
+            border: none; border-radius: 8px; font-weight: bold; cursor: pointer;
+        }
     </style>
 </head>
 <body>
 
-<div class="card">
-    <h2>Login</h2>
-    <input type="tel" id="phoneInput" placeholder="Enter Mobile Number">
-    <button onclick="goToProfile()">Enter Application</button>
+<div class="bg-logo"></div>
+
+<div class="login-box">
+    <h1>VData Solutions</h1>
+    <p class="slogan">Simply Smarter.</p>
+    
+    <input type="text" id="phoneInput" placeholder="Enter Mobile Number">
+    <button onclick="login()">Login to Profile</button>
 </div>
 
 <script>
-    function goToProfile() {
+    function login() {
         const phone = document.getElementById('phoneInput').value;
-        
-        // Validation: Ensure the number is entered
-        if(phone.length >= 10) {
-            // Save the number to local storage so profile.html can read it
+        if (phone.length > 5) {
             localStorage.setItem('userPhone', phone);
-            
-            // Redirect to the profile page
             window.location.href = "profile.html";
         } else {
-            alert("Please enter a valid mobile number.");
+            alert("Please enter a valid number");
         }
     }
 </script>
