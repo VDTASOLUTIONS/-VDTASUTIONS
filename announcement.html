@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Important Update</title>
+    <style>
+        body { margin: 0; font-family: sans-serif; background: #4b0082; display: flex; align-items: center; justify-content: center; height: 100vh; color: white; }
+        .card { background: white; color: #333; padding: 30px; border-radius: 20px; width: 350px; text-align: center; }
+        button { background: #4b0082; color: white; border: none; padding: 15px; width: 100%; border-radius: 10px; cursor: pointer; }
+        button:disabled { opacity: 0.5; cursor: not-allowed; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h2>Important Update</h2>
+        <p>Please acknowledge the terms to continue.</p>
+        <input type="checkbox" id="agree" onclick="document.getElementById('nextBtn').disabled = !this.checked;">
+        <label for="agree">I agree</label>
+        <br><br>
+        <button id="nextBtn" onclick="window.location.href='profile.html'" disabled>Continue</button>
+    </div>
+</body>
+</html>
