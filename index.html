@@ -29,7 +29,7 @@
         <a href="work-from-home.html">Work from home</a>
         <a href="data-entry.html">Data entry details</a>
         <!-- Updated link to trigger Tawk.to widget -->
-        <a href="javascript:void(0)" onclick="Tawk_API.maximize(); closeNav();" style="color: #00ffcc;">💬 Live Chat with Us</a>
+        <a href="javascript:void(0)" onclick="if(typeof Tawk_API !== 'undefined') Tawk_API.maximize(); closeNav();" style="color: #00ffcc;">💬 Live Chat with Us</a>
     </div>
     <div class="login-box">
         <div class="icon-circle">🔒</div>
@@ -55,14 +55,15 @@
 
     <!--Start of Tawk.to Script-->
     <script type="text/javascript">
-        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        var Tawk_API = Tawk_API || {};
+        var Tawk_LoadStart = new Date();
         (function(){
-        var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-        s1.async=true;
-        s1.src='https://embed.tawk.to/6a45f8682aaf551d42e2d367/default';
-        s1.charset='UTF-8';
-        s1.setAttribute('crossorigin','*');
-        s0.parentNode.insertBefore(s1,s0);
+            var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
+            s1.async = true;
+            s1.src = 'https://embed.tawk.to/6a45f8682aaf551d42e2d367/default';
+            s1.charset = 'UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1, s0);
         })();
     </script>
     <!--End of Tawk.to Script-->
