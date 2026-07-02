@@ -1,3 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <title>VData Solutions | Client Portal</title>
+    <style>
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        body { margin: 0; padding: 20px; font-family: 'Poppins', sans-serif; min-height: 100vh; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #4b0082 0%, #8a2be2 50%, #4b0082 100%); }
+        .container { animation: fadeIn 0.8s ease-out; background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(15px); width: 100%; max-width: 500px; padding: 25px; border-radius: 16px; border: 1px solid rgba(255, 255, 255, 0.3); box-shadow: 0 8px 32px rgba(0,0,0,0.3); }
+        .brand-header { display: flex; align-items: center; justify-content: center; margin-bottom: 5px; }
+        .brand-title { font-family: 'Great Vibes', cursive; font-size: 2.5rem; color: #ffffff; margin: 0; }
+        .divider { height: 2px; background: linear-gradient(90deg, transparent, #ff007f, transparent); margin: 15px 0; border: none; }
+        .slogan { text-align: center; color: #f0f0f0; font-size: 0.9rem; margin-bottom: 5px; font-style: italic; }
+        .grid { display: grid; grid-template-columns: 1fr; gap: 12px; margin-bottom: 20px; }
+        .field { background: rgba(255, 255, 255, 0.95); padding: 12px; border-radius: 10px; border-left: 5px solid #ff007f; }
+        .label { font-size: 0.7rem; color: #555; text-transform: uppercase; font-weight: bold; }
+        .value { font-size: 1rem; color: #222; font-weight: 700; display: block; }
+        button { background-color: #ff007f; color: white; border: none; width: 100%; padding: 14px; border-radius: 10px; cursor: pointer; font-weight: bold; transition: 0.3s; margin-top: 10px; }
+        button:hover { background-color: #e60072; }
+        .footer-note { font-size: 0.75rem; color: #eee; margin-top: 20px; text-align: left; line-height: 1.6; }
+        .auth-footer { text-align: center; margin-top: 20px; font-size: 0.8rem; color: #fff; opacity: 0.8; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="brand-header"><h1 class="brand-title">VData Solutions</h1></div>
+        <p class="slogan">Your Growth, Our Commitment.</p>
+        <hr class="divider">
+        <div id="profileDetails">Loading...</div>
+        <button onclick="logout()">Logout</button>
+        <div class="footer-note">
+            * Payments sometimes delay.<br>
+            * Sundays are not included in investment days.<br>
+            * New users must register with the admin.
+        </div>
+        <div class="auth-footer">🛡️ 100% Authenticated System</div>
+    </div>
+    
+    <script>
         const clientDatabase = {
             "9925786588": { 
                 "Full Name": "Azim Kalaniya", "Reference Name": "Sahil Shekh/Salman Saiyed", 
@@ -24,3 +65,41 @@
                 "Withdrawal Date": "Details send for the payment process", "UPI": "shekhimranbhai@kotakbank" 
             }
         };
+
+        const rawPhone = localStorage.getItem('userPhone') || "";
+        const cleanPhone = rawPhone.replace(/\D/g, '').slice(-10);
+        const displayElement = document.getElementById('profileDetails');
+        
+        if (cleanPhone && clientDatabase[cleanPhone]) {
+            const data = clientDatabase[cleanPhone];
+            let html = '<div class="grid">';
+            for (let key in data) { 
+                html += '<div class="field"><span class="label">' + key + '</span><span class="value">' + data[key] + '</span></div>'; 
+            }
+            displayElement.innerHTML = html + '</div>';
+        } else { 
+            displayElement.innerHTML = "<p style='color:white; text-align:center;'>Profile not found. Please log in.</p>"; 
+        }
+        
+        function logout() { 
+            localStorage.removeItem('userPhone'); 
+            window.location.href = "index.html"; 
+        }
+    </script>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API = Tawk_API || {};
+        var Tawk_LoadStart = new Date();
+        (function(){
+            var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
+            s1.async = true;
+            s1.src = 'https://embed.tawk.to/6a45f8682aaf551d42e2d367/default';
+            s1.charset = 'UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1, s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+</body>
+</html>
